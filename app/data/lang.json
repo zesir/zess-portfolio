@@ -1,0 +1,44 @@
+{
+  "en": {
+    "heroTitle": "I am",
+    "hero": "Creative Developer",
+    "nav": ["Home", "Identity", "Welcome"],
+    "identity": {
+      "title": "Who are you?",
+      "placeholder": "Type your name...",
+      "button": "Validate"
+    },
+    "welcome": {
+      "prefix": "Nice to meet you",
+      "fallback": "John",
+      "callJohn": "(I'll call you John)",
+      "LetIntroduce": "So let me introduce myself"
+    },
+    "About": {
+      "whatIDo": "I’m a front-end developer focused on crafting modern digital experiences.\nMy work sits at the intersection of design, interaction and clean code.\n\nAfter training as a Web Integrator, I specialized in React, TypeScript and component-driven architecture.\n\nI enjoy building interfaces that feel intentional — where every detail contributes to clarity and usability.",
+      "howIWork": "I believe good interfaces start with clarity.\nBefore writing code, I focus on structure, user flow and component logic.\n\nI build with a component-driven approach, prioritizing readability, scalability and maintainability.\n\nMy goal is simple:\ncreate interfaces that feel effortless for the user and clean for the developer.",
+      "Currently": "Currently building thoughtful interfaces and looking for new challenges."
+    }
+  },
+  "fr": {
+    "heroTitle": "Je suis",
+    "hero": "Développeur Créatif",
+    "nav": ["Accueil", "Identité", "Bienvenue"],
+    "identity": {
+      "title": "Et vous êtes ?",
+      "placeholder": "Ton prénom...",
+      "button": "Valider"
+    },
+    "welcome": {
+      "prefix": "Enchanté",
+      "fallback": "Jean",
+      "callJohn": "(Je t'appellerai Jean)",
+      "LetIntroduce": "Laissez moi me présenter"
+    },
+    "About": {
+      "whatIDo": "Je conçois et développe des interfaces web modernes.\nClaires, structurées et pensées pour l’expérience utilisateur.\n\nFormé comme Intégrateur Web, je me spécialise en React, TypeScript et architecture d’interface scalable.\n\nJ’aime transformer des idées complexes en interactions simples et intuitives, où design et code fonctionnent ensemble naturellement.",
+      "howIWork": "Une bonne interface commence par la clarté.\nAvant d’écrire du code, je réfléchis à la structure, au parcours utilisateur et à la logique des composants.\n\nJe travaille avec une approche orientée composants, en privilégiant la lisibilité, la scalabilité et la maintenabilité.\n\nMon objectif est simple :\ncréer des interfaces fluides pour l’utilisateur et propres pour le développeur.",
+      "Currently": "Actuellement à la recherche de nouveaux projets et défis techniques."
+    }
+  }
+}

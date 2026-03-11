@@ -1,0 +1,68 @@
+<template>
+  <section class="hero section" ref="hero">
+    <div class="intro" ref="intro">
+      <h1 class="intro__title" ref="title">
+        {{ langStore.t.heroTitle }}
+        <strong :style="{ color: themeStore.accentColor }">Zess</strong>
+      </h1>
+      <h2 class="intro__subtitle" ref="subtitle">{{ langStore.t.hero }}</h2>
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import { useLangStore } from "@/stores/useLangStore";
+import { useThemeStore } from "@/stores/useThemeStore"; // 1. Import du store
+
+const langStore = useLangStore();
+const themeStore = useThemeStore(); // 2. Initialisation du store
+
+const { $gsap } = useNuxtApp(); // On a enlevé $SplitText ici
+
+const title = ref<HTMLElement | null>(null);
+const subtitle = ref<HTMLElement | null>(null);
+const hero = ref<HTMLElement | null>(null);
+const intro = ref<HTMLElement | null>(null);
+
+defineExpose({
+  hero,
+  intro,
+  title,
+  subtitle,
+});
+
+onMounted(async () => {
+  await nextTick();
+
+  if (!$gsap || !title.value || !subtitle.value) return;
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const mouseX = e.clientX / window.innerWidth - 0.5;
+    const mouseY = e.clientY / window.innerHeight - 0.5;
+
+    $gsap.to(title.value, {
+      x: mouseX * 60,
+      y: mouseY * 60,
+      rotateX: -mouseY * 25,
+      rotateY: mouseX * 25,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+
+    $gsap.to(subtitle.value, {
+      x: mouseX * 35,
+      y: mouseY * 35,
+      rotateX: -mouseY * 15,
+      rotateY: mouseX * 15,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+  };
+
+  window.addEventListener("mousemove", handleMouseMove);
+
+  onUnmounted(() => {
+    window.removeEventListener("mousemove", handleMouseMove);
+  });
+});
+</script>
