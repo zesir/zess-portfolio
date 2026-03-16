@@ -2,9 +2,9 @@
   "en": {
     "heroTitle": "I am",
     "hero": "Creative Developer",
-    "nav": ["Home", "Identity", "Welcome"],
+    "nav": ["Home", "Identity", "Welcome", "About"],
     "identity": {
-      "title": "Who are you?",
+      "title": "And you ?",
       "placeholder": "Type your name...",
       "button": "Validate"
     },
@@ -15,15 +15,29 @@
       "LetIntroduce": "So let me introduce myself"
     },
     "About": {
-      "whatIDo": "I’m a front-end developer focused on crafting modern digital experiences.\nMy work sits at the intersection of design, interaction and clean code.\n\nAfter training as a Web Integrator, I specialized in React, TypeScript and component-driven architecture.\n\nI enjoy building interfaces that feel intentional — where every detail contributes to clarity and usability.",
-      "howIWork": "I believe good interfaces start with clarity.\nBefore writing code, I focus on structure, user flow and component logic.\n\nI build with a component-driven approach, prioritizing readability, scalability and maintainability.\n\nMy goal is simple:\ncreate interfaces that feel effortless for the user and clean for the developer.",
-      "Currently": "Currently building thoughtful interfaces and looking for new challenges."
+      "whatIDo": [
+        "I’m a <strong>front-end developer</strong> focused on crafting modern digital experiences.",
+        "My work sits at the intersection of <strong>design, interaction and clean code</strong>.",
+        "After training as a Web Integrator, I specialized in <strong>React, TypeScript</strong> and component-driven architecture.",
+        "I enjoy building interfaces that feel <strong>intentional</strong> — where every detail contributes to clarity."
+      ],
+      "howIWork": [
+        "I believe good interfaces start with <strong>clarity</strong>.",
+        "Before writing code, I focus on structure, user flow and <strong>component logic</strong>.",
+        "I build with a <strong>component-driven approach</strong>, prioritizing readability and scalability.",
+        "My goal is simple:",
+        "create interfaces that feel <strong>effortless for the user</strong> and clean for the developer."
+      ],
+      "Currently": [
+        "Currently building <strong>thoughtful interfaces</strong> and looking for new challenges."
+      ],
+      "DoyouWantToSee": "Let's dive into some of my projects"
     }
   },
   "fr": {
     "heroTitle": "Je suis",
     "hero": "Développeur Créatif",
-    "nav": ["Accueil", "Identité", "Bienvenue"],
+    "nav": ["Accueil", "Identité", "Bienvenue", "Bio"],
     "identity": {
       "title": "Et vous êtes ?",
       "placeholder": "Ton prénom...",
@@ -36,9 +50,23 @@
       "LetIntroduce": "Laissez moi me présenter"
     },
     "About": {
-      "whatIDo": "Je conçois et développe des interfaces web modernes.\nClaires, structurées et pensées pour l’expérience utilisateur.\n\nFormé comme Intégrateur Web, je me spécialise en React, TypeScript et architecture d’interface scalable.\n\nJ’aime transformer des idées complexes en interactions simples et intuitives, où design et code fonctionnent ensemble naturellement.",
-      "howIWork": "Une bonne interface commence par la clarté.\nAvant d’écrire du code, je réfléchis à la structure, au parcours utilisateur et à la logique des composants.\n\nJe travaille avec une approche orientée composants, en privilégiant la lisibilité, la scalabilité et la maintenabilité.\n\nMon objectif est simple :\ncréer des interfaces fluides pour l’utilisateur et propres pour le développeur.",
-      "Currently": "Actuellement à la recherche de nouveaux projets et défis techniques."
+      "whatIDo": [
+        "Je suis un <strong>développeur front-end</strong> concentré sur la création d'expériences numériques modernes.",
+        "Mon travail se situe à l'intersection du <strong>design, de l'interaction et du code propre</strong>.",
+        "Après une formation d'Intégrateur Web, je me suis spécialisé en <strong>React, TypeScript</strong> et en architecture orientée composants.",
+        "J'aime construire des interfaces <strong>intentionnelles</strong> — où chaque détail contribue à la clarté."
+      ],
+      "howIWork": [
+        "Je pense que les bonnes interfaces commencent par la <strong>clarté</strong>.",
+        "Avant d'écrire du code, je me concentre sur la structure, le flux utilisateur et la <strong>logique des composants</strong>.",
+        "Je construis avec une <strong>approche par composants</strong>, en privilégiant la lisibilité et l'évolutivité.",
+        "Mon objectif est simple :",
+        "créer des interfaces <strong>fluides pour l'utilisateur</strong> et saines pour le développeur."
+      ],
+      "Currently": [
+        "Actuellement en train de concevoir des <strong>interfaces soignées</strong> et à la recherche de nouveaux défis."
+      ],
+      "DoyouWantToSee": "Jettons un œil à mes projets"
     }
   }
 }

@@ -65,7 +65,7 @@ const handleToggle = () => {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid rgba(237, 235, 230, 0.2); // Base par défaut
+  border: 2px solid rgba(237, 235, 230, 0.2);
   background: transparent;
   color: #edebe6;
 

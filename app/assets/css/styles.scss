@@ -73,8 +73,36 @@ p {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  z-index: 10;
+  --vignette-opacity: 1;
 }
-
+.scroll-wrapper > * {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  will-change: transform, opacity;
+}
+.scroll-wrapper::before,
+.scroll-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20vh;
+  z-index: 10;
+  pointer-events: none;
+  opacity: var(--vignette-opacity, 1);
+}
+.scroll-wrapper::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg-color, #000), transparent);
+}
+.scroll-wrapper::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg-color, #000), transparent);
+}
 .section {
   position: absolute;
   top: 0;
@@ -102,7 +130,7 @@ p {
   z-index: 2;
   flex-direction: column;
   perspective: 400px;
-  opacity: 1; /* Le Hero est visible de suite */
+  opacity: 1;
   visibility: visible;
 
   .intro {
@@ -168,9 +196,18 @@ p {
   }
   .visitor-name {
     display: inline-block;
-    color: $color-accent;
+    color: v-bind("themeStore.accentColor") !important;
     margin-left: 0.5rem;
     text-transform: capitalize;
+    opacity: 1;
+  }
+
+  .pop-name-leave-to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  .pop-name-leave-active {
+    transition: all 0.2s ease;
   }
   .sub-text {
     margin-top: 1rem;
@@ -201,33 +238,168 @@ p {
 
 /*--- BIO Section ---*/
 .bio-section {
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 5;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+
+  .content-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 2rem;
+    z-index: 2;
+    background: transparent;
+  }
+
   .bio-grid {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    text-align: left;
+    gap: 1rem;
     width: 100%;
-    max-width: 1200px;
+    max-width: 850px;
+    margin: 0 auto;
+    will-change: transform;
   }
-  .reveal-text {
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
-    line-height: 1.4;
-    font-weight: 500;
-    color: rgba($color-primary, 0.1);
-    &.secondary {
-      font-size: clamp(1rem, 2vw, 1.5rem);
-      margin-top: 1rem;
-    }
-  }
+
   .reveal-line {
     display: block;
+    font-size: clamp(1.5rem, 1.5vw, 2.5rem);
+    line-height: 1.4;
     margin-bottom: 0.5rem;
+    color: $color-primary;
+    opacity: 0.1;
+    transform: translateY(30px);
+
+    strong {
+      color: var(--accent-color, $color-accent) !important;
+      font-weight: 700;
+    }
+  }
+
+  .bio-footer {
+    margin-top: 4rem;
+
+    .cta-text {
+      font-size: clamp(1.2rem, 4vw, 2.5rem);
+      font-family: $font-title;
+      color: $color-primary;
+    }
+
+    .highlight-name {
+      color: var(--accent-color, $color-accent) !important;
+      text-transform: capitalize;
+      font-weight: 600;
+    }
+  }
+}
+.transition-phrase {
+  margin-top: 10vh; /* Un peu d'espace avant le grand saut */
+}
+.highlight {
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  font-family: $font-hero;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+/*transition curtain*/
+.transition-curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: $color-primary, $alpha: 1);
+  z-index: 20;
+  transform: translateY(100vh);
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233f3a47' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-repeat: repeat;
+}
+
+/*--------------- Poject Section -----------*/
+.projects-section {
+  position: relative;
+  width: 100%;
+  z-index: 100 !important;
+}
+
+.projects-sticky-container {
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background-color: $color-primary;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233f3a47' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-repeat: repeat;
+}
+
+.projects-slide {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  padding: 0 10vw;
+  height: 80vh;
+  will-change: transform;
+}
+
+.projects-header {
+  flex-shrink: 0;
+  color: $color-bg;
+  line-height: 1;
+  h2 {
+    font-family: $font-hero;
+    font-size: 2rem;
   }
 }
 
+.project-card {
+  flex-shrink: 0;
+  width: 30vw;
+  height: 60vh;
+  background: #1a1a1a;
+  border-radius: 16px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.image-placeholder {
+  flex-grow: 1;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.card-info {
+  padding: 2rem;
+  color: white;
+}
+
+.projects-spacer {
+  flex-shrink: 0;
+  width: 10vw;
+}
 /*--- Harmonisation Globale ---*/
 .hero,
 .and-you,

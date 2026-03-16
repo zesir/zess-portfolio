@@ -27,12 +27,11 @@
 <script setup lang="ts">
 import { useLangStore } from "@/stores/useLangStore";
 import { useThemeStore } from "@/stores/useThemeStore";
-import { nextTick, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 const { $gsap } = useNuxtApp();
 
 const langStore = useLangStore();
 const themeStore = useThemeStore();
-const isFocused = ref(false);
 const visitorName = computed(() => themeStore.visitorName);
 const nameValidated = useState<boolean>("nameValidated");
 
@@ -42,37 +41,85 @@ const introduceRef = ref<HTMLElement | null>(null);
 
 defineExpose({ welcome, nameRef, introduceRef });
 
-watch(nameValidated, async (isValid) => {
-  if (isValid && nameRef.value) {
-    await nextTick();
+// Fonction d'animation réutilisable
+const animateName = () => {
+  if (!nameRef.value) return;
+
+  $gsap.killTweensOf(nameRef.value);
+
+  $gsap.fromTo(
+    nameRef.value,
+    {
+      autoAlpha: 0, // Force visibility: hidden + opacity: 0
+      scale: 0,
+      rotate: -10,
+    },
+    {
+      autoAlpha: 1, // Force visibility: visible + opacity: 1
+      scale: 1,
+      rotate: 0,
+      duration: 1,
+      ease: "elastic.out(1, 0.5)",
+      delay: 0.1, // Petit délai pour laisser le slide se stabiliser
+    },
+  );
+};
+
+// On observe le store
+watch(
+  () => themeStore.nameValidated,
+  (isValid) => {
+    if (isValid) {
+      nextTick(() => animateName());
+    }
+  },
+);
+
+// On surveille le changement de validation
+watch(nameValidated, (isValid) => {
+  if (isValid) {
+    nextTick(() => animateName());
+  }
+});
+
+onMounted(() => {
+  // 1. On ne touche pas à nameRef ici si !nameValidated.
+  // On laisse le HTML/CSS afficher "John" tranquillement.
+
+  if (nameValidated.value || themeStore.nameValidated) {
+    // Optionnel : on n'anime que si on veut vraiment l'effet au refresh
+    // sinon on laisse statique pour éviter tout saut.
+    $gsap.set(nameRef.value, { autoAlpha: 1, scale: 1 });
+  }
+
+  // 2. Animation de l'invitation au scroll (indépendante)
+  if (introduceRef.value && welcome.value) {
     $gsap.fromTo(
-      nameRef.value,
-      { scale: 0, opacity: 0, rotate: -10 },
+      introduceRef.value,
+      { opacity: 0, y: 20 },
       {
-        scale: 1,
+        scrollTrigger: {
+          trigger: welcome.value,
+          start: "top 80%", // Ajusté pour être sûr que ça déclenche
+        },
         opacity: 1,
-        rotate: 0,
+        y: 0,
         duration: 1,
-        ease: "elastic.out(1, 0.5)",
       },
     );
   }
 });
 
-onMounted(() => {
-  if (!introduceRef.value) return;
-
-  $gsap.to(introduceRef.value, {
-    scrollTrigger: {
-      trigger: welcome.value, // Se déclenche quand la section Welcome arrive
-      start: "top 20%", // Dès que le haut de la section est proche du haut
-      toggleActions: "play none none none",
-    },
-    opacity: 1,
-    y: 0,
-    duration: 1.2,
-    ease: "power2.out",
-    delay: 0.5,
-  });
-});
+// 3. Le déclencheur UNIQUE
+watch(
+  () => themeStore.nameValidated,
+  (newVal, oldVal) => {
+    // On n'anime QUE si on vient de cliquer sur "Valider" (le passage de false à true)
+    if (newVal === true && oldVal === false) {
+      nextTick(() => {
+        animateName();
+      });
+    }
+  },
+);
 </script>
