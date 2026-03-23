@@ -1,0 +1,54 @@
+[
+  {
+    "id": "p1",
+    "title": "Projet booki",
+    "category": "Web Design",
+    "image": "/images/kasa.webp",
+    "year": "2024",
+    "role": "Creative Developer",
+    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
+    "description": "Une expérience immersive basée sur...",
+    "cover": "/images/projets/cover-1.jpg",
+    "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
+    "link": "https://..."
+  },
+  {
+    "id": "p2",
+    "title": "Projet Beta",
+    "category": "Développement",
+    "image": "/images/damovieclub.webp",
+    "year": "2024",
+    "role": "Creative Developer",
+    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
+    "description": "Une expérience immersive basée sur...",
+    "cover": "/images/projets/cover-1.jpg",
+    "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
+    "link": "https://..."
+  },
+  {
+    "id": "p3",
+    "title": "Projet Beta",
+    "category": "Développement",
+    "image": "/images/kasa.webp",
+    "year": "2024",
+    "role": "Creative Developer",
+    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
+    "description": "Une expérience immersive basée sur...",
+    "cover": "/images/projets/cover-1.jpg",
+    "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
+    "link": "https://..."
+  },
+  {
+    "id": "p4",
+    "title": "Projet Beta",
+    "category": "Développement",
+    "image": "/images/kasa.webp",
+    "year": "2024",
+    "role": "Creative Developer",
+    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
+    "description": "Une expérience immersive basée sur...",
+    "cover": "/images/projets/cover-1.jpg",
+    "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
+    "link": "https://..."
+  }
+]

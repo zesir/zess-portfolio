@@ -14,7 +14,6 @@
       <BioSection ref="bioSection" />
       <ProjectSection ref="projectSection" />
     </div>
-    <div class="transition-curtain" ref="curtain"></div>
   </div>
 </template>
 
@@ -69,204 +68,195 @@ onMounted(async () => {
     bioSection.value?.$el,
   ];
 
-  if (s.some((el) => !el)) {
-    console.error("Une section est introuvable :", s);
-    return;
-  }
+  const bioGridEl = bioSection.value?.bioGrid;
+  const bioLinesEl = bioSection.value?.allLines;
+
+  if (s.some((el) => !el)) return;
+
+  // --- 1. CONFIGURATION DES PALIERS AVEC "DEAD ZONE" ---
+  const moveDur = 10; // Durée du mouvement pur
+  const stayDur = 6; // Le "un peu plus" (zone de repos 50px+)
+  const step = moveDur + stayDur; // Chaque bloc fait maintenant 16 unités
+
+  const p0 = 0;
+  const p1 = step; // 16
+  const p2 = step * 2; // 32
+  const p3 = step * 3; // 48
+  const p4 = step * 4; // 64 (100% de la barre)
 
   $gsap.set(s.slice(1), { autoAlpha: 0, yPercent: 100 });
-
-  const lines = s[3].querySelectorAll(".reveal-line");
-  console.log("Nombre de lignes trouvées :", lines.length);
 
   mainTl = $gsap.timeline({
     scrollTrigger: {
       trigger: scrollWrapper.value,
       start: "top top",
-      end: "+=1200%",
+      end: "+=1600%", // Augmenté pour compenser l'ajout de durée
       scrub: 1,
       pin: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
-        const totalTime = mainTl.totalDuration();
-        const bioLabelTime = mainTl.labels[SECTION_LABELS[3]!] ?? totalTime;
-        const welcomeLabelTime = mainTl.labels[SECTION_LABELS[2]!] ?? 0;
-        const identityLabelTime = mainTl.labels[SECTION_LABELS[1]!] ?? 0;
-
-        //  BARRE DE PROGRESSION
-        const targetRatio = bioLabelTime / totalTime;
-        let p = (self.progress / targetRatio) * 100;
-        scrollProgress.value = Math.min(p, 100);
-
-        // ILLUMINATION DES POINTS
         const currentPos = mainTl.time();
 
-        if (currentPos >= bioLabelTime - 0.2) {
-          currentStep.value = 3;
-        } else if (currentPos >= welcomeLabelTime - 0.2) {
-          currentStep.value = 2;
-        } else if (currentPos >= identityLabelTime - 0.2) {
-          currentStep.value = 1;
-        } else {
-          currentStep.value = 0;
-        }
+        // ILLUMINATION DES POINTS
+        // On utilise une marge de -1 pour que le point s'allume quand on est "bien arrivé"
+        if (currentPos >= p4 - 1) currentStep.value = 4;
+        else if (currentPos >= p3 - 1) currentStep.value = 3;
+        else if (currentPos >= p2 - 1) currentStep.value = 2;
+        else if (currentPos >= p1 - 1) currentStep.value = 1;
+        else currentStep.value = 0;
+
+        // BARRE DE PROGRESSION
+        scrollProgress.value = Math.min((currentPos / p4) * 100, 100);
       },
     },
   });
 
-  // Construction de la Timeline
+  // --- 2. CONSTRUCTION DE LA TIMELINE ---
+
+  mainTl.addLabel(SECTION_LABELS[0]!, p0);
+
+  // Transition Hero -> Identity (Arrive à 16)
   mainTl
-    .addLabel(SECTION_LABELS[0]!)
-    .to({}, { duration: 1 })
-    // Transitions Hero -> Identity -> Welcome
-    .to(s[0], { yPercent: -100, autoAlpha: 0, duration: 2 })
+    .to(s[0], { yPercent: -100, autoAlpha: 0, duration: moveDur })
     .fromTo(
       s[1],
       { yPercent: 100, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 2 },
+      { yPercent: 0, autoAlpha: 1, duration: moveDur },
       "<",
     )
-    .addLabel(SECTION_LABELS[1]!)
-    .to({}, { duration: 1 })
-    .to(s[1], { yPercent: -100, autoAlpha: 0, duration: 2 })
+    .to({}, { duration: stayDur }) // <-- Les pixels de rab
+    .addLabel(SECTION_LABELS[1]!, p1);
+
+  // Transition Identity -> Welcome (Arrive à 32)
+  mainTl
+    .to(s[1], { yPercent: -100, autoAlpha: 0, duration: moveDur })
     .fromTo(
       s[2],
       { yPercent: 100, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 2 },
+      { yPercent: 0, autoAlpha: 1, duration: moveDur },
       "<",
     )
-    .addLabel(SECTION_LABELS[2]!)
-    .to({}, { duration: 1 })
+    .to({}, { duration: stayDur }) // <-- Les pixels de rab
+    .addLabel(SECTION_LABELS[2]!, p2);
 
-    // Transition Welcome -> Bio
-    .to(s[2], { yPercent: -100, autoAlpha: 0, duration: 2 })
+  // Transition Welcome -> Bio (Arrive à 48)
+  mainTl
+    .to(s[2], { yPercent: -100, autoAlpha: 0, duration: moveDur })
     .fromTo(
       s[3],
       { yPercent: 100, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1, duration: 2 },
+      { yPercent: 0, autoAlpha: 1, duration: moveDur },
       "<",
     )
-    .addLabel(SECTION_LABELS[3]!);
-  // Récupération des éléments exposés par BioSection.vue
-  const bioGridEl = bioSection.value?.bioGrid;
-  const bioLinesEl = bioSection.value?.allLines;
+    .to({}, { duration: stayDur }) // <-- Les pixels de rab
+    .addLabel(SECTION_LABELS[3]!, p3);
 
+  // Transition Bio Scroll Interne (48 -> 64)
   if (bioGridEl && bioLinesEl) {
-    const vh = window.innerHeight;
-    const totalDuration = 10;
-
-    // 1. Reveal
     mainTl
       .fromTo(
         bioGridEl,
         { y: "50vh" },
         {
-          y: () => -(bioGridEl.offsetHeight - vh * 0.7),
-          duration: totalDuration,
+          y: () => -(bioGridEl.offsetHeight - window.innerHeight * 0.7),
+          duration: moveDur + stayDur,
           ease: "none",
         },
-        "<",
+        p3,
       )
+
       .fromTo(
         bioLinesEl,
         { autoAlpha: 0.1 },
         {
           autoAlpha: 1,
-          stagger: { amount: totalDuration * 0.8 },
-          duration: 1.5,
+          stagger: { amount: (moveDur + stayDur) * 0.8 },
+          duration: 2,
           ease: "power2.out",
         },
-        "<",
-      );
-
-    // Transition mes projets
-    mainTl
-
-      .fromTo(
-        curtain.value,
-        { y: vh },
-        { y: vh * 0.6, duration: 0.8, ease: "power2.in" },
-      )
-
-      // LE COLLAGE IMMÉDIAT
-
-      .to(curtain.value, {
-        y: 0,
-        duration: 2,
-        ease: "none",
-      })
-      .to(
-        bioGridEl,
-        {
-          y: `-=${vh * 0.6}`, // On parcourt exactement la même distance que le rideau
-          autoAlpha: 0,
-          duration: 2,
-          ease: "none",
-        },
-        "<",
+        p3,
       );
   }
-  await nextTick();
+
+  // --- 3. SECTION PROJETS (Position 64) ---
+  mainTl.addLabel(SECTION_LABELS[4]!, p4);
 
   if (projectSection.value) {
-    $gsap.set(projectSection.value.$el, { autoAlpha: 0 });
-  }
-
-  //  fin timeline bio
-
-  // LA TRANSITION HORIZONTALE
-  if (projectSection.value && curtain.value) {
+    const sectionEl = projectSection.value.$el;
     const slideEl = projectSection.value.projectsSlide;
-    const interceptorEl = projectSection.value.interceptor;
     const cards = slideEl.querySelectorAll(".project-card");
+    const allImages = slideEl.querySelectorAll(".project-img");
+    const projectTitle = sectionEl.querySelector(".projectsTitle");
 
-    const getScrollAmount = () => {
-      let slideWidth = slideEl.scrollWidth;
-      return -(slideWidth - window.innerWidth);
-    };
+    $gsap.set(sectionEl, {
+      autoAlpha: 1,
+      yPercent: 100,
+      zIndex: 100,
+      scale: 0.8,
+      borderRadius: 80,
+    });
+    $gsap.set(projectTitle, { xPercent: 20, autoAlpha: 0, scale: 1.5 });
+    $gsap.set(cards, { autoAlpha: 0, x: 100 });
 
     mainTl
-
-      .addLabel("step-projects")
-      .to(scrollWrapper.value, {
-        "--vignette-opacity": 0,
-        duration: 0.6,
-        ease: "power2.inOut",
-      })
-      .set(curtain.value, { zIndex: 5 })
-      .to(projectSection.value.$el, {
-        autoAlpha: 1,
-        duration: 1,
-      })
-
-      // B. Apparition des cartes une par une (stagger)
-      .fromTo(
-        cards,
+      // Montée
+      .to(
+        sectionEl,
         {
-          autoAlpha: 0,
-          x: 100,
-          scale: 0.9,
-        },
-        {
-          autoAlpha: 1,
-          x: 0,
+          yPercent: 0,
+          duration: 10,
           scale: 1,
-          stagger: 0.2,
-          duration: 1,
-          ease: "power2.out",
+          borderRadius: 0,
+          ease: "power2.inOut",
         },
-        "+=0.2",
+        p4,
+      )
+      .to(s[3], { autoAlpha: 0, scale: 0.9, duration: 5 }, p4)
+
+      // Reveal Titre et Fade-in des Cards
+      .to(
+        projectTitle,
+        { autoAlpha: 1, xPercent: 0, scale: 1.2, duration: 2 },
+        "-=3.5",
+      )
+      .to(
+        projectTitle,
+        {
+          rotation: -90,
+          scale: 0.4,
+          x: "-5vw",
+          y: "20vh",
+          duration: 4,
+          ease: "expo.inOut",
+        },
+        "-=0.5",
+      )
+      .to(
+        cards,
+        { autoAlpha: 1, x: 0, stagger: 0.2, duration: 1.5, ease: "power2.out" },
+        "-=1",
       )
 
-      // C. LE SCROLL HORIZONTAL
+      // Scroll Horizontal + Parallaxe
       .to(slideEl, {
-        x: getScrollAmount,
+        x: () => -(slideEl.scrollWidth - window.innerWidth),
         ease: "none",
-        duration: 4,
-      });
-
-    mainTl.to({}, { duration: 1 });
+        duration: 20,
+      })
+      .fromTo(
+        allImages,
+        { xPercent: 15 },
+        {
+          xPercent: -15,
+          ease: "none",
+          stagger: { each: 0.5 },
+          duration: 20,
+        },
+        "<",
+      );
   }
+
+  mainTl.to({}, { duration: 1 });
 });
 
 const goToSection = (index: number) => {

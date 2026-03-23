@@ -2,6 +2,7 @@
 $font-hero: "Anton", sans-serif;
 $font-title: "Space Grotesk", sans-serif;
 $font-text: "Inter", sans-serif;
+$font-bonus: "eurostile-extended", sans-serif;
 
 $color-bg: #111111;
 $color-primary: #edebe6;
@@ -40,8 +41,9 @@ body {
 
 /*---------Typographie-------------*/
 h1 {
-  font-family: $font-hero;
-  font-weight: 400;
+  font-family: $font-bonus;
+  font-weight: 900;
+  font-style: italic;
   font-size: clamp(3rem, 8vw, 8rem);
   text-transform: uppercase;
   margin: 0;
@@ -84,25 +86,7 @@ p {
   height: 100vh;
   will-change: transform, opacity;
 }
-.scroll-wrapper::before,
-.scroll-wrapper::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 20vh;
-  z-index: 10;
-  pointer-events: none;
-  opacity: var(--vignette-opacity, 1);
-}
-.scroll-wrapper::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--bg-color, #000), transparent);
-}
-.scroll-wrapper::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--bg-color, #000), transparent);
-}
+
 .section {
   position: absolute;
   top: 0;
@@ -305,27 +289,18 @@ p {
   color: var(--accent-color);
 }
 
-/*transition curtain*/
-.transition-curtain {
-  position: fixed;
+/*--------------- Poject Section -----------*/
+.projects-section {
+  position: fixed; /* Indispensable pour le pin */
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba($color: $color-primary, $alpha: 1);
-  z-index: 20;
-  transform: translateY(100vh);
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233f3a47' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-attachment: fixed;
-  background-repeat: repeat;
-}
-
-/*--------------- Poject Section -----------*/
-.projects-section {
-  position: relative;
-  width: 100%;
-  z-index: 100 !important;
+  height: 100vh;
+  background-color: #0d0d0d; /* Assure-toi qu'il y a un fond */
+  z-index: 100;
+  overflow: hidden;
+  /* Ne mets PAS de display: none ici */
+  visibility: visible;
 }
 
 .projects-sticky-container {
@@ -336,7 +311,7 @@ p {
   display: flex;
   align-items: center;
   background-color: $color-primary;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%233f3a47' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23c0bec4' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
   background-repeat: repeat;
 }
@@ -351,49 +326,68 @@ p {
 }
 
 .projects-header {
-  flex-shrink: 0;
-  color: $color-bg;
-  line-height: 1;
-  h2 {
+  position: absolute;
+  left: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+  .projectsTitle {
     font-family: $font-hero;
-    font-size: 2rem;
+    color: $color-accent;
+    font-size: 15vw; // TRÈS GROS
+
+    white-space: nowrap;
+    transform-origin: left center; // Point d'ancrage pour la rotation
+    display: inline-block;
   }
 }
 
 .project-card {
   flex-shrink: 0;
-  width: 30vw;
-  height: 60vh;
+  height: 40vh;
+  aspect-ratio: 1 / 1;
   background: #1a1a1a;
-  border-radius: 16px;
   cursor: pointer;
   overflow: hidden;
-}
+  border-radius: 20px;
+  .card-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    padding: 2rem;
+    color: $color-bg;
 
-.project-card:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
+    z-index: 20;
+  }
+  .card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 150%;
+    object-fit: cover;
 
-.card-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+    .image-placeholder {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
 
-.image-placeholder {
-  flex-grow: 1;
-  background: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  color: #555;
-  font-weight: bold;
-}
-
-.card-info {
-  padding: 2rem;
-  color: white;
+      .project-img {
+        height: 100%;
+        width: 150%; /* On lui donne 50% de largeur en plus pour le scroll */
+        object-fit: cover; /* Garde les proportions sans déformer */
+        position: absolute;
+        top: 0;
+        left: -25%; /* On la centre horizontalement par défaut */
+        will-change: transform;
+      }
+    }
+  }
 }
 
 .projects-spacer {
@@ -406,6 +400,183 @@ p {
 .welcome,
 .bio-section {
   @extend .section;
+}
+/*-----projet page --------*/
+.project-detail-view {
+  background-color: #edebe6;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23c0bec4' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-repeat: repeat;
+  min-height: 100vh;
+  color: $color-bg;
+  padding: 5rem 10%;
+  position: relative;
+  z-index: 999; // Pour passer au dessus du ScrollTrigger de l'accueil
+  nav {
+    button {
+      all: unset;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      /* On laisse de la place à GAUCHE pour la flèche */
+      padding: 1rem 1.5rem 1rem 3.5rem;
+
+      transition: all 0.3s ease;
+
+      &::before {
+        content: "←";
+        position: absolute;
+        /* Positionnement à gauche */
+        left: 1.2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: $color-accent;
+        transition: all 0.3s;
+      }
+
+      &:hover {
+        &::before {
+          /* Petit mouvement de recul de la flèche au survol */
+          transform: translateY(-50%) translateX(-5px);
+        }
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .project-header {
+    &__title {
+      color: $color-accent;
+      text-align: center;
+      padding: 5rem 0;
+    }
+    &__cat {
+      padding: 1rem;
+      font-family: $font-title;
+      font-weight: 900;
+      border: solid 1px $color-secondary;
+      color: $color-bg;
+      display: inline-block;
+      border-radius: 50px;
+    }
+  }
+  .project-main-content {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    .col-left {
+      width: 50%;
+      .image-wrapper {
+        overflow: hidden;
+        aspect-ratio: 1/1;
+        border-radius: 20px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* ESSENTIEL : Remplit le carré sans déformer l'image */
+          object-position: center; /* Centre l'image dans le carré */
+        }
+      }
+      .description-text {
+        a {
+          display: inline-block;
+          text-decoration: none;
+          color: $color-bg; // Couleur du texte initiale
+          padding: 1rem;
+          position: relative; // Indispensable pour positionner le pseudo-élément
+          z-index: 1;
+          overflow: hidden; // Pour que le fond ne dépasse pas des bords
+          border-bottom: solid 2px $color-accent;
+          transition: color 0.2s;
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0; // Départ invisible en bas
+            background: $color-accent;
+            z-index: -1; // Reste derrière le texte
+            transition: height 0.4s ease-in-out;
+          }
+          &:hover {
+            color: $color-primary; // Change la couleur du texte si besoin
+
+            &::before {
+              height: 100%; // Remplit toute la hauteur au survol
+            }
+          }
+        }
+      }
+    }
+    .specs-grid {
+      width: 50%;
+      .spec-item {
+        h3 {
+          border-bottom: solid 1px $color-bg;
+        }
+        .stack-list {
+          list-style: none; /* Enlève les puces par défaut */
+          padding: 0;
+          display: flex;
+          flex-wrap: wrap; /* Permet de passer à la ligne s'il y a trop de technos */
+          gap: 12px;
+          .stack-item {
+            display: flex;
+            align-items: center; /* Aligne l'icône et le texte verticalement */
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.05); /* Effet glass léger */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            .stack__name {
+              font-size: 0.9rem;
+              color: $color-bg;
+              text-transform: capitalize; /* Met la 1ère lettre en majuscule */
+              font-family: $font-text;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.next-project {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 20vh;
+
+  .next-btn {
+    all: unset;
+    cursor: pointer;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: $font-bonus;
+    font-weight: 900;
+    font-size: 3rem;
+    transition: all 0.3s;
+
+    &:hover {
+      background: $color-accent;
+      color: $color-primary;
+    }
+  }
 }
 
 /*--- VERTICAL NAV ---*/
@@ -480,4 +651,27 @@ p {
   60% {
     transform: translateY(-5px);
   }
+}
+
+/* Page Transition: Scale Effect */
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.6s ease;
+}
+
+/* La page qui arrive commence petite et grandit */
+.page-enter-from {
+  opacity: 0;
+  transform: scale(0.9); /* Zoom avant */
+  filter: blur(10px);
+}
+
+/* La page qui part devient grande et s'efface */
+.page-leave-to {
+  opacity: 0;
+  transform: scale(1.1); /* Zoom arrière */
+  filter: blur(10px);
 }

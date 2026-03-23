@@ -12,12 +12,12 @@
 
 <script setup lang="ts">
 import { useLangStore } from "@/stores/useLangStore";
-import { useThemeStore } from "@/stores/useThemeStore"; // 1. Import du store
+import { useThemeStore } from "@/stores/useThemeStore";
 
 const langStore = useLangStore();
-const themeStore = useThemeStore(); // 2. Initialisation du store
+const themeStore = useThemeStore();
 
-const { $gsap } = useNuxtApp(); // On a enlevé $SplitText ici
+const { $gsap } = useNuxtApp();
 
 const title = ref<HTMLElement | null>(null);
 const subtitle = ref<HTMLElement | null>(null);

@@ -15,10 +15,15 @@ export default defineNuxtConfig({
       link: [
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;800&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;`400;800&display=swap",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://use.typekit.net/cme4duv.css",
         },
       ],
     },
+    pageTransition: { name: "page", mode: "out-in" },
   },
 
   // plugins
@@ -40,5 +45,5 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@nuxt/icon"],
 });

@@ -2,7 +2,7 @@
   "en": {
     "heroTitle": "I am",
     "hero": "Creative Developer",
-    "nav": ["Home", "Identity", "Welcome", "About"],
+    "nav": ["Home", "Identity", "Welcome", "About", "Projects"],
     "identity": {
       "title": "And you ?",
       "placeholder": "Type your name...",
@@ -37,7 +37,7 @@
   "fr": {
     "heroTitle": "Je suis",
     "hero": "Développeur Créatif",
-    "nav": ["Accueil", "Identité", "Bienvenue", "Bio"],
+    "nav": ["Accueil", "Identité", "Bienvenue", "Bio", "Projets"],
     "identity": {
       "title": "Et vous êtes ?",
       "placeholder": "Ton prénom...",
