@@ -4,6 +4,7 @@ import { computed } from "vue";
 
 export const useThemeStore = defineStore("theme", () => {
   const visitorName = useState<string>("visitorName", () => "");
+  const confirmedName = useState<string>("confirmedName", () => "");
   const nameValidated = useState<boolean>("nameValidated", () => false);
 
   const getHue = (name: string) => {
@@ -32,6 +33,7 @@ export const useThemeStore = defineStore("theme", () => {
   });
   return {
     visitorName,
+    confirmedName,
     nameValidated,
     accentColor,
     backgroundColor,

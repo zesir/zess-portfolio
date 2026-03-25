@@ -32,6 +32,20 @@
         "Currently building <strong>thoughtful interfaces</strong> and looking for new challenges."
       ],
       "DoyouWantToSee": "Let's dive into some of my projects"
+    },
+    "project": {
+      "back": "Back",
+      "theProject": "The Project",
+      "objectives": "Objectives",
+      "skills": "Skills",
+      "result": "Result",
+      "improvements": "Areas for improvement",
+      "visitSite": "Visit site →",
+      "year": "Year",
+      "role": "Role",
+      "stack": "Stack",
+      "prev": "← Previous project",
+      "next": "Next project →"
     }
   },
   "fr": {
@@ -67,6 +81,20 @@
         "Actuellement en train de concevoir des <strong>interfaces soignées</strong> et à la recherche de nouveaux défis."
       ],
       "DoyouWantToSee": "Jettons un œil à mes projets"
+    },
+    "project": {
+      "back": "Retour",
+      "theProject": "Le Projet",
+      "objectives": "Objectifs",
+      "skills": "Compétences",
+      "result": "Résultat",
+      "improvements": "Axes d'amélioration",
+      "visitSite": "Visiter le site →",
+      "year": "Année",
+      "role": "Rôle",
+      "stack": "Stack",
+      "prev": "← Projet précédent",
+      "next": "Projet suivant →"
     }
   }
 }

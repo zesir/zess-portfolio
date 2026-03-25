@@ -1,11 +1,13 @@
 <template>
-  <nav class="vertical-nav">
-    <div
+  <nav class="vertical-nav" aria-label="Navigation des sections">
+    <button
       v-for="(step, index) in steps"
       :key="index"
       class="nav-dot"
       :class="{ active: index <= currentStep }"
       @click="$emit('go-to', index)"
+      :aria-label="`Aller à la section ${step}`"
+      :aria-current="index === currentStep ? 'true' : undefined"
       :style="{
         backgroundColor:
           index <= currentStep ? accentColor : 'rgba(237, 235, 230, 0.3)',
@@ -17,7 +19,7 @@
       >
         {{ step }}
       </span>
-    </div>
+    </button>
 
     <div class="progress-track">
       <div

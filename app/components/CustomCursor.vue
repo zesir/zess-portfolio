@@ -26,30 +26,33 @@ const ring = ref<HTMLElement | null>(null);
 const isClient = ref(false);
 
 onMounted(() => {
-  isClient.value = true;
+  // ✅ On n'active le curseur que si la souris est détectée
+  if (window.matchMedia("(pointer: fine)").matches) {
+    isClient.value = true;
 
-  const moveCursor = (e: MouseEvent) => {
-    if (!dot.value || !ring.value) return;
+    const moveCursor = (e: MouseEvent) => {
+      if (!dot.value || !ring.value) return;
 
-    $gsap.to(dot.value, {
-      x: e.clientX,
-      y: e.clientY,
-      duration: 0,
+      $gsap.to(dot.value, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0,
+      });
+
+      $gsap.to(ring.value, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.2,
+        ease: "elastic.out(1, 0.5)",
+      });
+    };
+
+    window.addEventListener("mousemove", moveCursor);
+
+    onUnmounted(() => {
+      window.removeEventListener("mousemove", moveCursor);
     });
-
-    $gsap.to(ring.value, {
-      x: e.clientX,
-      y: e.clientY,
-      duration: 0.2,
-      ease: "elastic.out(1, 0.5)",
-    });
-  };
-
-  window.addEventListener("mousemove", moveCursor);
-
-  onUnmounted(() => {
-    window.removeEventListener("mousemove", moveCursor);
-  });
+  }
 });
 </script>
 <style scoped>

@@ -1,0 +1,49 @@
+{
+  "heroTitle": "I am",
+  "hero": "Creative Developer",
+  "nav": ["Home", "Identity", "Welcome", "About", "Projects"],
+  "identity": {
+    "title": "And you ?",
+    "placeholder": "Type your name...",
+    "button": "Validate"
+  },
+  "welcome": {
+    "prefix": "Nice to meet you",
+    "fallback": "John",
+    "callJohn": "(I'll call you John)",
+    "letIntroduce": "So let me introduce myself"
+  },
+  "about": {
+    "whatIDo": [
+      "I'm a <strong>front-end developer</strong> focused on crafting modern digital experiences.",
+      "My work sits at the intersection of <strong>design, interaction and clean code</strong>.",
+      "After training as a Web Integrator, I specialized in <strong>React, TypeScript</strong> and component-driven architecture.",
+      "I enjoy building interfaces that feel <strong>intentional</strong> — where every detail contributes to clarity."
+    ],
+    "howIWork": [
+      "I believe good interfaces start with <strong>clarity</strong>.",
+      "Before writing code, I focus on structure, user flow and <strong>component logic</strong>.",
+      "I build with a <strong>component-driven approach</strong>, prioritizing readability and scalability.",
+      "My goal is simple:",
+      "create interfaces that feel <strong>effortless for the user</strong> and clean for the developer."
+    ],
+    "currently": [
+      "Currently building <strong>thoughtful interfaces</strong> and looking for new challenges."
+    ],
+    "doYouWantToSee": "Let's dive into some of my projects"
+  },
+  "project": {
+    "back": "Back",
+    "theProject": "The Project",
+    "objectives": "Objectives",
+    "skills": "Skills",
+    "result": "Result",
+    "improvements": "Areas for improvement",
+    "visitSite": "Visit site →",
+    "year": "Year",
+    "role": "Role",
+    "stack": "Stack",
+    "prev": "← Previous project",
+    "next": "Next project →"
+  }
+}

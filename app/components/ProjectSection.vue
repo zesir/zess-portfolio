@@ -1,5 +1,18 @@
 <template>
   <section class="projects-section" ref="interceptor">
+    <Transition name="toast">
+      <div
+        v-if="toastVisible"
+        class="project-toast"
+        :style="{ '--accent-color': themeStore.accentColor }"
+      >
+        <span
+          >{{ toastMessage.prefix }} <em>{{ visitorName }}</em
+          >{{ toastMessage.suffix }}</span
+        >
+      </div>
+    </Transition>
+
     <div class="projects-sticky-container">
       <div class="projects-slide" ref="projectsSlide">
         <div class="projects-header">
@@ -37,18 +50,39 @@
 </template>
 
 <script setup lang="ts">
+import langData from "@/data/lang.json";
 import projectsData from "@/data/projects.json";
-import { ref } from "vue";
+import { useThemeStore } from "@/stores/useThemeStore";
+import { computed, ref } from "vue";
 
 const { $gsap } = useNuxtApp();
 const interceptor = ref(null);
 const projectsSlide = ref(null);
+const themeStore = useThemeStore();
 
 const projects = ref(projectsData);
 
 const router = useRouter();
+const { locale } = useI18n({ useScope: 'global' });
+const lang = computed(() => langData[locale.value.startsWith('fr') ? 'fr' : 'en']);
+const toastVisible = ref(false);
+const visitorName = computed(() => themeStore.confirmedName || lang.value.welcome.fallback);
+
+type ToastVariant = { prefix: string; suffix: string };
+const variants: ToastVariant[] = [
+  { prefix: "Bon choix", suffix: " !" },
+  { prefix: "Bien vu,", suffix: " !" },
+  { prefix: "Je valide", suffix: " !" },
+  { prefix: "Carrément", suffix: " !" },
+];
+const toastMessage = ref<ToastVariant>(variants[0]!);
+
 const goToProject = (id: string) => {
-  router.push(`/projects/${id}`);
+  toastMessage.value = variants[Math.floor(Math.random() * variants.length)]!;
+  toastVisible.value = true;
+  setTimeout(() => {
+    router.push(`/projects/${id}`);
+  }, 900);
 };
 
 const initParallax = (parentTimeline: gsap.core.Timeline) => {

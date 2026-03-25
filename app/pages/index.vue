@@ -1,11 +1,12 @@
 <template>
-  <div class="main-layout">
+  <div class="main-layout" :style="ready ? {} : { opacity: 0 }">
     <VerticalNav
       :steps="steps"
       :current-step="currentStep"
       :progress="scrollProgress"
       @go-to="goToSection"
     />
+    <MobileNav :steps="steps" @go-to="goToSection" />
 
     <div ref="scrollWrapper" class="scroll-wrapper">
       <HeroSection ref="heroSection" />
@@ -18,14 +19,14 @@
 </template>
 
 <script setup lang="ts">
-import { useLangStore } from "@/stores/useLangStore";
-import { useThemeStore } from "@/stores/useThemeStore"; // L'import
-
+import MobileNav from "@/components/MobileNav.vue";
+import langData from "@/data/lang.json";
+import { useThemeStore } from "@/stores/useThemeStore";
 import { computed, nextTick, onMounted, ref } from "vue";
 
 const { $gsap } = useNuxtApp();
-const langStore = useLangStore();
-const themeStore = useThemeStore(); // L'instanciation
+const { locale } = useI18n({ useScope: "global" });
+const themeStore = useThemeStore();
 
 const scrollWrapper = ref<HTMLElement | null>(null);
 const heroSection = ref<any>(null);
@@ -42,10 +43,15 @@ interface ProjectSectionInstance {
 // On applique ce type à la ref
 const projectSection = ref<ProjectSectionInstance | null>(null);
 
-const steps = computed(() => langStore.t.nav);
+const steps = computed(
+  () => langData[locale.value.startsWith("fr") ? "fr" : "en"].nav,
+);
 const currentStep = ref(0);
 const scrollProgress = ref(0);
 let mainTl: gsap.core.Timeline;
+
+const route = useRoute();
+const ready = ref(!route.query.step);
 
 const SECTION_LABELS = [
   "start",
@@ -69,7 +75,9 @@ onMounted(async () => {
   ];
 
   const bioGridEl = bioSection.value?.bioGrid;
-  const bioLinesEl = bioSection.value?.allLines;
+  const bioLinesEl = bioSection.value?.$el
+    ? Array.from(bioSection.value.$el.querySelectorAll(".reveal-line"))
+    : [];
 
   if (s.some((el) => !el)) return;
 
@@ -152,30 +160,29 @@ onMounted(async () => {
     .addLabel(SECTION_LABELS[3]!, p3);
 
   // Transition Bio Scroll Interne (48 -> 64)
-  if (bioGridEl && bioLinesEl) {
-    mainTl
-      .fromTo(
-        bioGridEl,
-        { y: "50vh" },
-        {
-          y: () => -(bioGridEl.offsetHeight - window.innerHeight * 0.7),
-          duration: moveDur + stayDur,
-          ease: "none",
-        },
-        p3,
-      )
+  if (bioGridEl && bioLinesEl.length) {
+    mainTl.fromTo(
+      bioGridEl,
+      { y: "50vh" },
+      {
+        y: () => -(bioGridEl.offsetHeight - window.innerHeight * 0.7),
+        duration: moveDur + stayDur,
+        ease: "none",
+      },
+      p3,
+    );
 
-      .fromTo(
-        bioLinesEl,
-        { autoAlpha: 0.1 },
-        {
-          autoAlpha: 1,
-          stagger: { amount: (moveDur + stayDur) * 0.8 },
-          duration: 2,
-          ease: "power2.out",
-        },
-        p3,
-      );
+    mainTl.fromTo(
+      bioLinesEl,
+      { autoAlpha: 0.1 },
+      {
+        autoAlpha: 1,
+        stagger: { amount: (moveDur + stayDur) * 0.8 },
+        duration: 2,
+        ease: "power2.out",
+      },
+      p3,
+    );
   }
 
   // --- 3. SECTION PROJETS (Position 64) ---
@@ -187,6 +194,7 @@ onMounted(async () => {
     const cards = slideEl.querySelectorAll(".project-card");
     const allImages = slideEl.querySelectorAll(".project-img");
     const projectTitle = sectionEl.querySelector(".projectsTitle");
+    const stickyContainer = sectionEl.querySelector(".projects-sticky-container") as HTMLElement;
 
     $gsap.set(sectionEl, {
       autoAlpha: 1,
@@ -226,6 +234,7 @@ onMounted(async () => {
           scale: 0.4,
           x: "-5vw",
           y: "20vh",
+          lineHeight: "7rem",
           duration: 4,
           ease: "expo.inOut",
         },
@@ -253,10 +262,26 @@ onMounted(async () => {
           duration: 20,
         },
         "<",
+      )
+      .to(
+        stickyContainer,
+        { backgroundColor: "#111111", ease: "none", duration: 20 },
+        "<",
       );
   }
 
   mainTl.to({}, { duration: 1 });
+
+  const stepParam = Number(route.query.step);
+  if (!isNaN(stepParam) && stepParam > 0) {
+    await nextTick();
+    const targetLabel = SECTION_LABELS[stepParam];
+    if (targetLabel && mainTl?.scrollTrigger) {
+      const targetScroll = mainTl.scrollTrigger.labelToScroll(targetLabel);
+      window.scrollTo(0, targetScroll);
+    }
+  }
+  ready.value = true;
 });
 
 const goToSection = (index: number) => {

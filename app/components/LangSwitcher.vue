@@ -13,17 +13,17 @@
     }"
   >
     <div class="inner-text" ref="textRef">
-      {{ langStore.locale.toUpperCase() }}
+      {{ locale.toUpperCase() }}
     </div>
   </button>
 </template>
 
 <script setup lang="ts">
-import { useLangStore } from "@/stores/useLangStore";
 import { useThemeStore } from "@/stores/useThemeStore";
 import { ref } from "vue";
 
-const langStore = useLangStore();
+const { locale } = useI18n({ useScope: 'global' });
+const localeCookie = useCookie('locale');
 const themeStore = useThemeStore();
 const { $gsap } = useNuxtApp();
 
@@ -38,7 +38,9 @@ const handleToggle = () => {
     duration: 0.2,
     ease: "power2.in",
     onComplete: () => {
-      langStore.toggleLang();
+      const newLocale = locale.value === "en" ? "fr" : "en";
+      locale.value = newLocale as "en" | "fr";
+      localeCookie.value = newLocale;
       $gsap.fromTo(
         textRef.value,
         { y: 20, opacity: 0 },

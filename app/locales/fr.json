@@ -1,0 +1,49 @@
+{
+  "heroTitle": "Je suis",
+  "hero": "Développeur Créatif",
+  "nav": ["Accueil", "Identité", "Bienvenue", "Bio", "Projets"],
+  "identity": {
+    "title": "Et vous êtes ?",
+    "placeholder": "Ton prénom...",
+    "button": "Valider"
+  },
+  "welcome": {
+    "prefix": "Enchanté",
+    "fallback": "Jean",
+    "callJohn": "(Je t'appellerai Jean)",
+    "letIntroduce": "Laissez moi me présenter"
+  },
+  "about": {
+    "whatIDo": [
+      "Je suis un <strong>développeur front-end</strong> concentré sur la création d'expériences numériques modernes.",
+      "Mon travail se situe à l'intersection du <strong>design, de l'interaction et du code propre</strong>.",
+      "Après une formation d'Intégrateur Web, je me suis spécialisé en <strong>React, TypeScript</strong> et en architecture orientée composants.",
+      "J'aime construire des interfaces <strong>intentionnelles</strong> — où chaque détail contribue à la clarté."
+    ],
+    "howIWork": [
+      "Je pense que les bonnes interfaces commencent par la <strong>clarté</strong>.",
+      "Avant d'écrire du code, je me concentre sur la structure, le flux utilisateur et la <strong>logique des composants</strong>.",
+      "Je construis avec une <strong>approche par composants</strong>, en privilégiant la lisibilité et l'évolutivité.",
+      "Mon objectif est simple :",
+      "créer des interfaces <strong>fluides pour l'utilisateur</strong> et saines pour le développeur."
+    ],
+    "currently": [
+      "Actuellement en train de concevoir des <strong>interfaces soignées</strong> et à la recherche de nouveaux défis."
+    ],
+    "doYouWantToSee": "Jettons un œil à mes projets"
+  },
+  "project": {
+    "back": "Retour",
+    "theProject": "Le Projet",
+    "objectives": "Objectifs",
+    "skills": "Compétences",
+    "result": "Résultat",
+    "improvements": "Axes d'amélioration",
+    "visitSite": "Visiter le site →",
+    "year": "Année",
+    "role": "Rôle",
+    "stack": "Stack",
+    "prev": "← Projet précédent",
+    "next": "Projet suivant →"
+  }
+}

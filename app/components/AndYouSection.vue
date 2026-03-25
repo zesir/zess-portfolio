@@ -1,10 +1,10 @@
 <template>
   <section class="and-you section" ref="andYou">
-    <h2 class="section-title">{{ langStore.t.identity.title }}</h2>
+    <h2 class="section-title">{{ lang.identity.title }}</h2>
     <form class="form">
       <input
         type="text"
-        :placeholder="langStore.t.identity.placeholder"
+        :placeholder="lang.identity.placeholder"
         v-model="themeStore.visitorName"
         @focus="isFocused = true"
         @blur="isFocused = false"
@@ -18,22 +18,24 @@
 </template>
 
 <script setup lang="ts">
-import { useLangStore } from "@/stores/useLangStore";
+import langData from "@/data/lang.json";
 import { useThemeStore } from "@/stores/useThemeStore";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 
 const andYou = ref<HTMLElement | null>(null);
 defineExpose({ andYou });
 
-const langStore = useLangStore();
+const { locale } = useI18n({ useScope: 'global' });
+const lang = computed(() => langData[locale.value.startsWith('fr') ? 'fr' : 'en']);
 const themeStore = useThemeStore();
 const isFocused = ref(false);
 const { $gsap } = useNuxtApp();
 
 watch(
   () => themeStore.visitorName,
-  (valeurDuNom) => {
-    console.log("Le nom a changé dans le store :", valeurDuNom);
+  () => {
+    themeStore.confirmedName = "";
+    themeStore.nameValidated = false;
   },
 );
 

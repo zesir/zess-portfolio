@@ -2,19 +2,20 @@
   <section class="hero section" ref="hero">
     <div class="intro" ref="intro">
       <h1 class="intro__title" ref="title">
-        {{ langStore.t.heroTitle }}
+        {{ lang.heroTitle }}
         <strong :style="{ color: themeStore.accentColor }">Zess</strong>
       </h1>
-      <h2 class="intro__subtitle" ref="subtitle">{{ langStore.t.hero }}</h2>
+      <h2 class="intro__subtitle" ref="subtitle">{{ lang.hero }}</h2>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { useLangStore } from "@/stores/useLangStore";
+import langData from "@/data/lang.json";
 import { useThemeStore } from "@/stores/useThemeStore";
 
-const langStore = useLangStore();
+const { locale } = useI18n({ useScope: 'global' });
+const lang = computed(() => langData[locale.value.startsWith('fr') ? 'fr' : 'en']);
 const themeStore = useThemeStore();
 
 const { $gsap } = useNuxtApp();

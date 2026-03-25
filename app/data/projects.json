@@ -1,7 +1,7 @@
 [
   {
     "id": "p1",
-    "title": "Projet booki",
+    "title": "Argent Bank",
     "category": "Web Design",
     "image": "/images/kasa.webp",
     "year": "2024",
@@ -18,9 +18,28 @@
     "category": "Développement",
     "image": "/images/damovieclub.webp",
     "year": "2024",
-    "role": "Creative Developer",
-    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
-    "description": "Une expérience immersive basée sur...",
+    "role": "Developer Frontend",
+    "stack": ["React", "Redux", "Swagger", "Node", "Sass", "Fetch"],
+    "gif": "/images/booki.gif",
+    "objectif": [
+      "Créer une application React complète et responsive.",
+      "Mettre en place un système d'authentification sécurisé (Login/Logout).",
+      "Permettre à l'utilisateur de modifier son profil et de visualiser ses comptes.",
+      "Permettre à l'utilisateur de modifier son profil et de visualiser ses comptes."
+    ],
+    "Compétence": [
+      "Gestion du State Global : Utilisation de Redux pour maintenir la session utilisateur persistante entre les pages.",
+      "Interactions API : Intégration de tokens JWT pour sécuriser les routes et les échanges de données.",
+      "Modélisation technique : Rédaction de documentation API via Swagger pour définir les structures de données (transactions).",
+      "Clean Code : Organisation rigoureuse des composants React et des slices Redux."
+    ],
+    "description": "Développement de la partie Front-End d'une nouvelle banque en ligne. Le back-end était déjà fourni, et l'enjeu était de créer une interface utilisateur dynamique capable de communiquer avec une API REST sécurisée.",
+    "résultat": "Une application web fluide où l'utilisateur peut se connecter, accéder à son tableau de bord de manière sécurisée et mettre à jour ses informations personnelles en temps réel sans rechargement de page.",
+    "Amélioration": [
+      "Ajout de graphiques de dépenses (type Recharts) pour une meilleure visualisation des données.",
+      "Implémentation d'un Dark Mode pour améliorer le confort visuel (UI/UX).",
+      "Mise en place de tests unitaires avec Jest pour sécuriser les composants critiques de login."
+    ],
     "cover": "/images/projets/cover-1.jpg",
     "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
     "link": "https://..."

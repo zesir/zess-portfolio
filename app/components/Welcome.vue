@@ -1,38 +1,39 @@
 <template>
-  <section class="welcome section" ref="welcome">
+  <section class="welcome section" ref="welcome" :style="{ '--accent-color': themeStore.accentColor }">
     <div class="welcome-content">
       <h2 class="section-title">
-        <span class="prefix">{{ langStore.t.welcome.prefix }}</span>
+        <span class="prefix">{{ lang.welcome.prefix }}</span>
         <strong ref="nameRef" class="visitor-name">
           {{
             visitorName && visitorName.trim() !== ""
               ? visitorName
-              : langStore.t.welcome.fallback
+              : lang.welcome.fallback
           }}
         </strong>
       </h2>
 
       <p v-if="!visitorName || visitorName.trim() === ''" class="sub-text">
-        {{ langStore.t.welcome.callJohn }}
+        {{ lang.welcome.callJohn }}
       </p>
     </div>
 
     <div class="scroll-invitation" ref="introduceRef">
-      <p class="reveal-text">{{ langStore.t.welcome.LetIntroduce }}</p>
+      <p class="reveal-text">{{ lang.welcome.LetIntroduce }}</p>
       <div class="scroll-arrow">↓</div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { useLangStore } from "@/stores/useLangStore";
+import langData from "@/data/lang.json";
 import { useThemeStore } from "@/stores/useThemeStore";
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 const { $gsap } = useNuxtApp();
 
-const langStore = useLangStore();
+const { locale } = useI18n({ useScope: 'global' });
+const lang = computed(() => langData[locale.value.startsWith('fr') ? 'fr' : 'en']);
 const themeStore = useThemeStore();
-const visitorName = computed(() => themeStore.visitorName);
+const visitorName = computed(() => themeStore.confirmedName);
 const nameValidated = useState<boolean>("nameValidated");
 
 const welcome = ref<HTMLElement | null>(null);
@@ -45,6 +46,7 @@ defineExpose({ welcome, nameRef, introduceRef });
 const animateName = () => {
   if (!nameRef.value) return;
 
+  themeStore.confirmedName = themeStore.visitorName.trim();
   $gsap.killTweensOf(nameRef.value);
 
   $gsap.fromTo(

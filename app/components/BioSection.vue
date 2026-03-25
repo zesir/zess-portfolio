@@ -5,7 +5,7 @@
         <div class="bio-block">
           <p class="reveal-text">
             <span
-              v-for="(line, i) in langStore.t.About.whatIDo"
+              v-for="(line, i) in whatIDo"
               :key="'do-' + i"
               class="reveal-line"
               v-html="line"
@@ -15,7 +15,7 @@
         <div class="bio-block">
           <p class="reveal-text secondary">
             <span
-              v-for="(line, i) in langStore.t.About.howIWork"
+              v-for="(line, i) in howIWork"
               :key="'work-' + i"
               class="reveal-line"
               v-html="line"
@@ -25,7 +25,7 @@
         <div class="bio-block">
           <p class="reveal-text secondary">
             <span
-              v-for="(line, i) in langStore.t.About.Currently"
+              v-for="(line, i) in currently"
               :key="'curr-' + i"
               class="reveal-line"
               v-html="line"
@@ -35,12 +35,12 @@
         <div class="bio-footer">
           <p class="cta-text">
             <span class="reveal-line transition-phrase highlight">
-              {{ langStore.t.About.DoyouWantToSee }}
+              {{ about.DoyouWantToSee }}
               <span class="highlight-name">
                 {{
                   visitorName && visitorName.trim() !== ""
                     ? visitorName
-                    : langStore.t.welcome.fallback
+                    : langData[getLang()].welcome.fallback
                 }}
               </span>
               !!
@@ -53,13 +53,19 @@
 </template>
 
 <script setup lang="ts">
-import { useLangStore } from "@/stores/useLangStore";
 import { useThemeStore } from "@/stores/useThemeStore";
 import { computed, onMounted, ref } from "vue";
 
-const langStore = useLangStore();
+import langData from "@/data/lang.json";
+
+const { locale } = useI18n({ useScope: 'global' });
 const themeStore = useThemeStore();
 
+const getLang = () => (locale.value.startsWith("fr") ? "fr" : "en");
+const about = computed(() => langData[getLang()].About);
+const whatIDo = computed(() => about.value.whatIDo);
+const howIWork = computed(() => about.value.howIWork);
+const currently = computed(() => about.value.Currently);
 const visitorName = computed(() => themeStore.visitorName);
 
 const bio = ref<HTMLElement | null>(null);
