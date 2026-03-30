@@ -1,5 +1,6 @@
 <template>
   <button
+    v-if="!isProjectPage"
     class="lang-switcher"
     @click="handleToggle"
     ref="btnRef"
@@ -28,6 +29,8 @@ import { ref } from "vue";
 const { locale } = useI18n({ useScope: 'global' });
 const localeCookie = useCookie('locale');
 const themeStore = useThemeStore();
+const route = useRoute();
+const isProjectPage = computed(() => route.path.startsWith('/projects/'));
 const { $gsap } = useNuxtApp();
 
 const btnRef = ref(null);
@@ -59,42 +62,3 @@ const handleToggle = () => {
   );
 };
 </script>
-
-<style scoped lang="scss">
-.lang-switcher {
-  position: fixed;
-  top: 40px;
-  left: 40px;
-  z-index: 9999;
-
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid rgba(237, 235, 230, 0.2);
-  background: transparent;
-  color: #edebe6;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  overflow: hidden;
-
-  font-family: "Space Mono", monospace;
-  font-size: 0.8rem;
-  font-weight: bold;
-
-  transition:
-    border-color 0.4s ease,
-    color 0.4s ease,
-    transform 0.3s ease;
-
-  &:hover {
-    background: rgba(237, 235, 230, 0.05);
-  }
-}
-
-.inner-text {
-  display: block;
-}
-</style>
