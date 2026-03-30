@@ -1,11 +1,13 @@
 <template>
-  <div class="main-layout" :style="ready ? {} : { opacity: 0 }">
-    <VerticalNav
-      :steps="steps"
-      :current-step="currentStep"
-      :progress="scrollProgress"
-      @go-to="goToSection"
-    />
+  <main class="main-layout" :style="ready ? {} : { opacity: 0 }">
+    <ClientOnly>
+      <VerticalNav
+        :steps="steps"
+        :current-step="currentStep"
+        :progress="scrollProgress"
+        @go-to="goToSection"
+      />
+    </ClientOnly>
     <MobileNav :steps="steps" @go-to="goToSection" />
 
     <div ref="scrollWrapper" class="scroll-wrapper">
@@ -15,18 +17,33 @@
       <BioSection ref="bioSection" />
       <ProjectSection ref="projectSection" />
     </div>
-  </div>
+    <ContactSection ref="contactSection" />
+  </main>
 </template>
 
 <script setup lang="ts">
 import MobileNav from "@/components/MobileNav.vue";
 import langData from "@/data/lang.json";
 import { useThemeStore } from "@/stores/useThemeStore";
-import { computed, nextTick, onMounted, ref } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 
-const { $gsap } = useNuxtApp();
+const { $gsap, $ScrollTrigger } = useNuxtApp();
 const { locale } = useI18n({ useScope: "global" });
 const themeStore = useThemeStore();
+
+useSeoMeta({
+  title: "Zess — Creative Developer",
+  description:
+    "Portfolio of Zess, a Creative Developer crafting immersive digital experiences with modern web technologies.",
+  ogTitle: "Zess — Creative Developer",
+  ogDescription:
+    "Portfolio of Zess, a Creative Developer crafting immersive digital experiences with modern web technologies.",
+  ogType: "website",
+  twitterCard: "summary_large_image",
+  twitterTitle: "Zess — Creative Developer",
+  twitterDescription:
+    "Portfolio of Zess, a Creative Developer crafting immersive digital experiences with modern web technologies.",
+});
 
 const scrollWrapper = ref<HTMLElement | null>(null);
 const heroSection = ref<any>(null);
@@ -42,6 +59,7 @@ interface ProjectSectionInstance {
 
 // On applique ce type à la ref
 const projectSection = ref<ProjectSectionInstance | null>(null);
+const contactSection = ref<any>(null);
 
 const steps = computed(
   () => langData[locale.value.startsWith("fr") ? "fr" : "en"].nav,
@@ -49,9 +67,16 @@ const steps = computed(
 const currentStep = ref(0);
 const scrollProgress = ref(0);
 let mainTl: gsap.core.Timeline;
+let navLabels: string[] = [];
 
 const route = useRoute();
-const ready = ref(!route.query.step);
+const router = useRouter();
+const ready = ref(false);
+
+onUnmounted(() => {
+  mainTl?.scrollTrigger?.kill();
+  mainTl?.kill();
+});
 
 const SECTION_LABELS = [
   "start",
@@ -59,11 +84,15 @@ const SECTION_LABELS = [
   "step-welcome",
   "step-about",
   "step-projects",
+  "step-contact",
 ];
 
 onMounted(async () => {
+  if (!route.query.step) window.scrollTo(0, 0);
+
   await nextTick();
   await new Promise((resolve) => setTimeout(resolve, 200));
+  if (!route.query.step) window.scrollTo(0, 0);
 
   if (!$gsap || !scrollWrapper.value) return;
 
@@ -90,31 +119,51 @@ onMounted(async () => {
   const p1 = step; // 16
   const p2 = step * 2; // 32
   const p3 = step * 3; // 48
-  const p4 = step * 4; // 64 (100% de la barre)
+  const p4 = step * 4; // 64
 
   $gsap.set(s.slice(1), { autoAlpha: 0, yPercent: 100 });
+
+  // sectionTimes est rempli après construction de la timeline
+  let sectionTimes: number[] = [];
 
   mainTl = $gsap.timeline({
     scrollTrigger: {
       trigger: scrollWrapper.value,
       start: "top top",
-      end: "+=1600%", // Augmenté pour compenser l'ajout de durée
+      end: "+=1600%",
       scrub: 1,
       pin: true,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
-        const currentPos = mainTl.time();
+        // self.progress = position scroll réelle sans lag scrub
+        const currentPos = self.progress * mainTl.totalDuration();
 
-        // ILLUMINATION DES POINTS
-        // On utilise une marge de -1 pour que le point s'allume quand on est "bien arrivé"
-        if (currentPos >= p4 - 1) currentStep.value = 4;
-        else if (currentPos >= p3 - 1) currentStep.value = 3;
-        else if (currentPos >= p2 - 1) currentStep.value = 2;
-        else if (currentPos >= p1 - 1) currentStep.value = 1;
-        else currentStep.value = 0;
+        // ILLUMINATION — temps exacts issus des labels GSAP
+        let active = 0;
+        for (let i = sectionTimes.length - 1; i >= 0; i--) {
+          if (currentPos >= (sectionTimes[i] ?? 0)) {
+            active = i;
+            break;
+          }
+        }
+        currentStep.value = active;
 
-        // BARRE DE PROGRESSION
-        scrollProgress.value = Math.min((currentPos / p4) * 100, 100);
+        // BARRE DE PROGRESSION — normalisée sur tous les dots (y compris contact)
+        const totalGaps = SECTION_LABELS.length - 1;
+        if (totalGaps <= 0) {
+          scrollProgress.value = 0;
+          return;
+        }
+
+        const fromTime = sectionTimes[active] ?? 0;
+        const toTime = sectionTimes[active + 1] ?? null;
+
+        const fraction =
+          toTime !== null && toTime > fromTime
+            ? Math.min(1, (currentPos - fromTime) / (toTime - fromTime))
+            : 0;
+
+        scrollProgress.value = ((active + fraction) / totalGaps) * 100;
       },
     },
   });
@@ -194,7 +243,9 @@ onMounted(async () => {
     const cards = slideEl.querySelectorAll(".project-card");
     const allImages = slideEl.querySelectorAll(".project-img");
     const projectTitle = sectionEl.querySelector(".projectsTitle");
-    const stickyContainer = sectionEl.querySelector(".projects-sticky-container") as HTMLElement;
+    const stickyContainer = sectionEl.querySelector(
+      ".projects-sticky-container",
+    ) as HTMLElement;
 
     $gsap.set(sectionEl, {
       autoAlpha: 1,
@@ -227,6 +278,8 @@ onMounted(async () => {
         { autoAlpha: 1, xPercent: 0, scale: 1.2, duration: 2 },
         "-=3.5",
       )
+      // Label déclenché quand la section est montée, avant l'apparition des cartes
+      .addLabel("step-projects-ready")
       .to(
         projectTitle,
         {
@@ -240,6 +293,7 @@ onMounted(async () => {
         },
         "-=0.5",
       )
+
       .to(
         cards,
         { autoAlpha: 1, x: 0, stagger: 0.2, duration: 1.5, ease: "power2.out" },
@@ -265,28 +319,96 @@ onMounted(async () => {
       )
       .to(
         stickyContainer,
-        { backgroundColor: "#111111", ease: "none", duration: 20 },
+        {
+          backgroundColor: () => themeStore.backgroundColor,
+          ease: "none",
+          duration: 20,
+          onStart: () => stickyContainer.classList.add("is-dark"),
+          onReverseComplete: () => stickyContainer.classList.remove("is-dark"),
+        },
         "<",
       );
   }
 
   mainTl.to({}, { duration: 1 });
 
+  // Lecture des temps exacts des labels après construction complète
+  // Pour le point projets, on utilise "step-projects-ready" (section montée, avant scroll horizontal)
+  navLabels = [...SECTION_LABELS];
+  navLabels[4] = "step-projects-ready";
+  // step-contact est hors timeline — on lui attribue totalDuration comme borne
+  sectionTimes = navLabels
+    .filter(l => l !== "step-contact")
+    .map((label) => mainTl.labels[label] ?? 0);
+
+  // ScrollTrigger séparé pour la section contact (hors scroll pincé)
+  const contactEl = contactSection.value?.contactRef;
+  if (contactEl) {
+    $gsap.from(contactEl, {
+      scrollTrigger: {
+        trigger: contactEl,
+        start: "top 80%",
+        onEnter: () => {
+          currentStep.value = 5;
+          scrollProgress.value = 100;
+        },
+        onLeaveBack: () => {
+          currentStep.value = 4;
+          scrollProgress.value = ((SECTION_LABELS.length - 2) / (SECTION_LABELS.length - 1)) * 100;
+        },
+      },
+      y: 60,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+  }
+
   const stepParam = Number(route.query.step);
   if (!isNaN(stepParam) && stepParam > 0) {
-    await nextTick();
-    const targetLabel = SECTION_LABELS[stepParam];
+    const targetLabel = navLabels[stepParam] ?? SECTION_LABELS[stepParam];
     if (targetLabel && mainTl?.scrollTrigger) {
-      const targetScroll = mainTl.scrollTrigger.labelToScroll(targetLabel);
+      $ScrollTrigger.refresh();
+      const targetTime = mainTl.labels[targetLabel] ?? 0;
+      const st = mainTl.scrollTrigger;
+      const targetScroll =
+        st.start +
+        (targetTime / mainTl.totalDuration()) * (st.end - st.start);
+      mainTl.seek(targetTime);
       window.scrollTo(0, targetScroll);
     }
+    router.replace("/");
+  } else {
+    window.scrollTo(0, 0);
+    $ScrollTrigger.refresh();
+    mainTl.seek(0);
   }
   ready.value = true;
 });
 
+watch(() => themeStore.backgroundColor, () => {
+  if (!mainTl) return;
+  mainTl.invalidate();
+  mainTl.scrollTrigger?.update();
+});
+
 const goToSection = (index: number) => {
   if (!mainTl?.scrollTrigger) return;
-  const targetLabel = SECTION_LABELS[index];
+
+  // Contact section — hors du scroll pincé
+  if (index === 5) {
+    const contactEl = contactSection.value?.contactRef;
+    if (contactEl) {
+      $gsap.to(window, {
+        scrollTo: { y: contactEl, autoKill: false },
+        duration: 1.2,
+        ease: "power2.inOut",
+      });
+    }
+    return;
+  }
+
+  const targetLabel = navLabels[index] ?? SECTION_LABELS[index];
   if (!targetLabel) return;
 
   const targetScroll = mainTl.scrollTrigger.labelToScroll(targetLabel);

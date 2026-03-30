@@ -2,7 +2,18 @@
   "en": {
     "heroTitle": "I am",
     "hero": "Creative Developer",
-    "nav": ["Home", "Identity", "Welcome", "About", "Projects"],
+    "nav": ["Home", "Identity", "Welcome", "About", "Projects", "Contact"],
+    "contact": {
+      "title": "Let's work together",
+      "subtitle": "Got a project in mind? Let's talk.",
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Your message",
+      "send": "Send",
+      "sending": "Sending...",
+      "success": "Message sent!",
+      "error": "Something went wrong, try again."
+    },
     "identity": {
       "title": "And you ?",
       "placeholder": "Type your name...",
@@ -15,23 +26,34 @@
       "LetIntroduce": "So let me introduce myself"
     },
     "About": {
+      "accroche": [
+        "Passionate about image in all its forms — from <strong>cinema and painting to design</strong> — I shaped my path through varied experiences:",
+        "creating <strong>murals, video production</strong> and working alongside a <strong>contemporary artist</strong>. Naturally curious, I enjoy exploring the technical mechanics behind creative work."
+      ],
       "whatIDo": [
-        "I’m a <strong>front-end developer</strong> focused on crafting modern digital experiences.",
-        "My work sits at the intersection of <strong>design, interaction and clean code</strong>.",
+        "Today, I channel this artistic sensibility and love for interaction into the world of the <strong>Web</strong>, where language becomes a design tool in its own right.",
+        "I am a <strong>front-end developer</strong> focused on crafting modern digital experiences.",
         "After training as a Web Integrator, I specialized in <strong>React, TypeScript</strong> and component-driven architecture.",
-        "I enjoy building interfaces that feel <strong>intentional</strong> — where every detail contributes to clarity."
+        "I love building <strong>polished interfaces</strong> — where every detail contributes to readability."
       ],
       "howIWork": [
-        "I believe good interfaces start with <strong>clarity</strong>.",
-        "Before writing code, I focus on structure, user flow and <strong>component logic</strong>.",
+        "Before writing any code, I focus on structure, user flow and <strong>component logic</strong>.",
         "I build with a <strong>component-driven approach</strong>, prioritizing readability and scalability.",
-        "My goal is simple:",
-        "create interfaces that feel <strong>effortless for the user</strong> and clean for the developer."
+        "I believe a successful interface fades into the background, thanks to solid structure and straightforward development logic."
       ],
       "Currently": [
-        "Currently building <strong>thoughtful interfaces</strong> and looking for new challenges."
+        "Currently crafting <strong>polished interfaces</strong> and looking for new challenges."
       ],
-      "DoyouWantToSee": "Let's dive into some of my projects"
+      "DoyouWantToSee": "Let's take a look at my projects"
+    },
+    "projectsSection": {
+      "title": ["My", "Projects"],
+      "toasts": [
+        { "prefix": "Good pick", "suffix": "!" },
+        { "prefix": "Nice choice", "suffix": "!" },
+        { "prefix": "Love it", "suffix": "!" },
+        { "prefix": "Let's go", "suffix": "!" }
+      ]
     },
     "project": {
       "back": "Back",
@@ -45,13 +67,25 @@
       "role": "Role",
       "stack": "Stack",
       "prev": "← Previous project",
-      "next": "Next project →"
+      "next": "Next project →",
+      "newTab": "opens in a new tab"
     }
   },
   "fr": {
     "heroTitle": "Je suis",
     "hero": "Développeur Créatif",
-    "nav": ["Accueil", "Identité", "Bienvenue", "Bio", "Projets"],
+    "nav": ["Accueil", "Identité", "Bienvenue", "Bio", "Projets", "Contact"],
+    "contact": {
+      "title": "Travaillons ensemble",
+      "subtitle": "Un projet en tête ? Parlons-en.",
+      "name": "Votre prénom",
+      "email": "Votre email",
+      "message": "Votre message",
+      "send": "Envoyer",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé !",
+      "error": "Une erreur est survenue, réessayez."
+    },
     "identity": {
       "title": "Et vous êtes ?",
       "placeholder": "Ton prénom...",
@@ -64,23 +98,34 @@
       "LetIntroduce": "Laissez moi me présenter"
     },
     "About": {
+      "accroche": [
+        "Passionné par l'image sous toutes ses formes — du <strong>cinéma à la peinture en passant par le design</strong> — j'ai forgé mon parcours à travers des expériences variées :",
+        "réalisation de <strong>fresques, captation vidéo</strong> ou construction au service d’un <strong>artiste contemporain</strong>. Curieux de nature, j’aime explorer les rouages techniques derrière la création."
+      ],
       "whatIDo": [
+        "Aujourd’hui, je transpose cette sensibilité artistique et mon goût pour l'interaction dans l'univers du <strong>Web</strong>, où le langage devient un outil de conception à part entière.",
         "Je suis un <strong>développeur front-end</strong> concentré sur la création d'expériences numériques modernes.",
-        "Mon travail se situe à l'intersection du <strong>design, de l'interaction et du code propre</strong>.",
         "Après une formation d'Intégrateur Web, je me suis spécialisé en <strong>React, TypeScript</strong> et en architecture orientée composants.",
-        "J'aime construire des interfaces <strong>intentionnelles</strong> — où chaque détail contribue à la clarté."
+        "J'aime construire des interfaces <strong>soignées</strong> — où chaque détail contribue à la lisibilité."
       ],
       "howIWork": [
-        "Je pense que les bonnes interfaces commencent par la <strong>clarté</strong>.",
         "Avant d'écrire du code, je me concentre sur la structure, le flux utilisateur et la <strong>logique des composants</strong>.",
         "Je construis avec une <strong>approche par composants</strong>, en privilégiant la lisibilité et l'évolutivité.",
-        "Mon objectif est simple :",
-        "créer des interfaces <strong>fluides pour l'utilisateur</strong> et saines pour le développeur."
+        "Je crois qu'une interface réussie s'efface au profit de l'usage, grâce à une structure solide et une logique de développement simple."
       ],
       "Currently": [
         "Actuellement en train de concevoir des <strong>interfaces soignées</strong> et à la recherche de nouveaux défis."
       ],
       "DoyouWantToSee": "Jettons un œil à mes projets"
+    },
+    "projectsSection": {
+      "title": ["Mes", "Projets"],
+      "toasts": [
+        { "prefix": "Bon choix", "suffix": "!" },
+        { "prefix": "Bien vu,", "suffix": "!" },
+        { "prefix": "Je valide", "suffix": "!" },
+        { "prefix": "Carrément", "suffix": "!" }
+      ]
     },
     "project": {
       "back": "Retour",
@@ -94,7 +139,8 @@
       "role": "Rôle",
       "stack": "Stack",
       "prev": "← Projet précédent",
-      "next": "Projet suivant →"
+      "next": "Projet suivant →",
+      "newTab": "ouvre dans un nouvel onglet"
     }
   }
 }

@@ -1,8 +1,15 @@
 <template>
-  <section class="bio-section section" ref="bio">
+  <section class="bio-section section" ref="bio" aria-labelledby="bio-heading">
+    <h2 id="bio-heading" class="visually-hidden">{{ langData[getLang()].nav[3] }}</h2>
     <div class="content-container" :style="dynamicStyles">
       <div class="bio-grid" ref="bioGrid">
         <div class="bio-block">
+          <p
+            class="accroche"
+            v-for="(line, i) in accroche"
+            :key="'do-' + i"
+            v-html="line"
+          ></p>
           <p class="reveal-text">
             <span
               v-for="(line, i) in whatIDo"
@@ -58,11 +65,12 @@ import { computed, onMounted, ref } from "vue";
 
 import langData from "@/data/lang.json";
 
-const { locale } = useI18n({ useScope: 'global' });
+const { locale } = useI18n({ useScope: "global" });
 const themeStore = useThemeStore();
 
 const getLang = () => (locale.value.startsWith("fr") ? "fr" : "en");
 const about = computed(() => langData[getLang()].About);
+const accroche = computed(() => about.value.accroche);
 const whatIDo = computed(() => about.value.whatIDo);
 const howIWork = computed(() => about.value.howIWork);
 const currently = computed(() => about.value.Currently);

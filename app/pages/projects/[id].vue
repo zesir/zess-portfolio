@@ -1,8 +1,8 @@
 <template>
-  <div v-if="project" class="project-detail-view" :style="{ '--accent-color': themeStore.accentColor }">
+  <main v-if="project" class="project-detail-view" :style="{ '--accent-color': themeStore.accentColor }">
     <!-- NAV par dessus -->
     <nav class="project-nav" :class="{ scrolled: navScrolled }">
-      <button @click="router.push('/?step=4')" class="back-btn">
+      <button @click="router.push('/?step=4')" class="back-btn" :aria-label="lang.project.back">
         {{ lang.project.back }}
       </button>
     </nav>
@@ -46,15 +46,16 @@
               <ul class="stack-list">
                 <li
                   v-for="tech in project.stack"
-                  :key="tech"
+                  :key="tech.name"
                   class="stack-item"
                 >
                   <Icon
-                    :name="`simple-icons:${tech}`"
+                    v-if="tech.icon"
+                    :name="`simple-icons:${tech.icon}`"
                     size="20"
                     class="stack__icon"
                   />
-                  <span class="stack__name">{{ tech }}</span>
+                  <span class="stack__name">{{ tech.name }}</span>
                 </li>
               </ul>
             </div>
@@ -91,8 +92,8 @@
           <h2><Icon name="lucide:check-circle" />{{ lang.project.result }}</h2>
           <div class="resultat-inner">
             <p>{{ project.résultat }}</p>
-            <div v-if="project.gif" class="objectif-gif-wrapper">
-              <img :src="project.gif" :alt="project.title" class="objectif-gif" />
+            <div v-if="project.video" class="objectif-gif-wrapper">
+              <video :src="project.video" class="objectif-gif" autoplay loop muted playsinline />
             </div>
           </div>
         </section>
@@ -106,7 +107,13 @@
           </ul>
         </section>
 
-        <a :href="project.link" target="_blank" class="external-link">
+        <a
+          :href="project.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="external-link"
+          :aria-label="`${lang.project.visitSite} (${lang.project.newTab ?? 'ouvre dans un nouvel onglet'})`"
+        >
           {{ lang.project.visitSite }}
         </a>
       </div>
@@ -119,6 +126,7 @@
         @click="goToPrevProject"
         :disabled="!prevProject"
         :style="prevProject ? `--thumb: url('${prevProject.image}')` : ''"
+        :aria-label="prevProject ? `${lang.project.prev} : ${prevProject.title}` : lang.project.prev"
       >
         <span>{{ lang.project.prev }}</span>
       </button>
@@ -127,11 +135,12 @@
         @click="goToNextProject"
         :disabled="!nextProject"
         :style="nextProject ? `--thumb: url('${nextProject.image}')` : ''"
+        :aria-label="nextProject ? `${lang.project.next} : ${nextProject.title}` : lang.project.next"
       >
         <span>{{ lang.project.next }}</span>
       </button>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -150,16 +159,31 @@ const route = useRoute();
 const router = useRouter();
 
 const projectId = route.params.id;
-const project = projectsData.find((p) => p.id === projectId);
-if (!project) {
+const baseProject = projectsData.find((p) => p.id === projectId);
+if (!baseProject) {
   throw createError({ statusCode: 404, statusMessage: "Projet introuvable" });
 }
 const currentIndex = projectsData.findIndex((p) => p.id === projectId);
 const safeIndex = currentIndex === -1 ? 0 : currentIndex;
 
+const getLang = () => locale.value.startsWith("fr") ? "fr" : "en";
+const project = computed(() => ({ ...baseProject, ...baseProject.translations[getLang()] }));
+
 const prevProject = safeIndex > 0 ? projectsData[safeIndex - 1] : null;
 const nextProject =
   safeIndex < projectsData.length - 1 ? projectsData[safeIndex + 1] : null;
+
+useSeoMeta({
+  title: () => `${baseProject.title} — Zess`,
+  description: () => project.value.description,
+  ogTitle: () => `${baseProject.title} — Zess`,
+  ogDescription: () => project.value.description,
+  ogImage: baseProject.image,
+  twitterTitle: () => `${baseProject.title} — Zess`,
+  twitterDescription: () => project.value.description,
+  twitterImage: baseProject.image,
+  twitterCard: "summary_large_image",
+});
 
 const goToPrevProject = () => {
   if (prevProject) router.push(`/projects/${prevProject.id}`);
@@ -174,6 +198,9 @@ const headerRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
   const { $gsap } = useNuxtApp();
+
+  // Forcer scroll à 0 avant tout pour éviter un flash de parallax résiduel
+  window.scrollTo(0, 0);
 
   // Parallaxe + détection scroll
   const coverImg = coverRef.value?.querySelector("img") as HTMLElement | null;

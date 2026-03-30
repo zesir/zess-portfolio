@@ -32,12 +32,14 @@ defineExpose({
   subtitle,
 });
 
+let handleMouseMove: ((e: MouseEvent) => void) | null = null;
+
 onMounted(async () => {
   await nextTick();
 
   if (!$gsap || !title.value || !subtitle.value) return;
 
-  const handleMouseMove = (e: MouseEvent) => {
+  handleMouseMove = (e: MouseEvent) => {
     const mouseX = e.clientX / window.innerWidth - 0.5;
     const mouseY = e.clientY / window.innerHeight - 0.5;
 
@@ -61,9 +63,9 @@ onMounted(async () => {
   };
 
   window.addEventListener("mousemove", handleMouseMove);
+});
 
-  onUnmounted(() => {
-    window.removeEventListener("mousemove", handleMouseMove);
-  });
+onUnmounted(() => {
+  if (handleMouseMove) window.removeEventListener("mousemove", handleMouseMove);
 });
 </script>

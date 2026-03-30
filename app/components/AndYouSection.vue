@@ -1,8 +1,10 @@
 <template>
   <section class="and-you section" ref="andYou">
     <h2 class="section-title">{{ lang.identity.title }}</h2>
-    <form class="form">
+    <form class="form" @submit.prevent="validateName">
+      <label for="visitor-name" class="visually-hidden">{{ lang.identity.title }}</label>
       <input
+        id="visitor-name"
         type="text"
         :placeholder="lang.identity.placeholder"
         v-model="themeStore.visitorName"

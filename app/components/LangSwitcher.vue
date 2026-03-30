@@ -3,8 +3,11 @@
     class="lang-switcher"
     @click="handleToggle"
     ref="btnRef"
+    :aria-label="`${locale === 'fr' ? 'Switch to English' : 'Passer en français'}`"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
+    @focus="isHovered = true"
+    @blur="isHovered = false"
     :style="{
       borderColor: isHovered
         ? themeStore.accentColor

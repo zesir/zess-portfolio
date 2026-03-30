@@ -12,7 +12,40 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: { lang: "en" },
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+      title: "Zess — Creative Developer",
+      meta: [
+        {
+          name: "description",
+          content:
+            "Portfolio of Zess, a Creative Developer crafting immersive digital experiences with modern web technologies.",
+        },
+        { property: "og:type", content: "website" },
+        { property: "og:title", content: "Zess — Creative Developer" },
+        {
+          property: "og:description",
+          content:
+            "Portfolio of Zess, a Creative Developer crafting immersive digital experiences with modern web technologies.",
+        },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: "Zess — Creative Developer" },
+        {
+          name: "twitter:description",
+          content:
+            "Portfolio of Zess, a Creative Developer crafting immersive digital experiences with modern web technologies.",
+        },
+      ],
+      script: [
+        { innerHTML: "history.scrollRestoration = 'manual'" },
+      ],
       link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon/favicon.ico" },
+        { rel: "icon", type: "image/svg+xml", href: "/favicon/favicon.svg" },
+        { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon/favicon-96x96.png" },
+        { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon/apple-touch-icon.png" },
+        { rel: "manifest", href: "/favicon/site.webmanifest" },
         {
           rel: "preconnect",
           href: "https://use.typekit.net",

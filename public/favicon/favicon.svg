@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Calque_2" data-name="Calque 2" viewBox="0 0 512 512" width="512" height="512"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <style>
+      .cls-1 {
+        fill: url(#Dégradé_sans_nom_8);
+      }
+
+      .cls-2 {
+        fill: url(#Dégradé_sans_nom_8-2);
+      }
+    </style>
+    <linearGradient id="Dégradé_sans_nom_8" data-name="Dégradé sans nom 8" x1="256" y1="120.36" x2="256" y2="343.65" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e8974d"></stop>
+      <stop offset="1" stop-color="#e85d04"></stop>
+    </linearGradient>
+    <linearGradient id="Dégradé_sans_nom_8-2" data-name="Dégradé sans nom 8" x1="256" y1="3.9" x2="256" y2="511.17" xlink:href="#Dégradé_sans_nom_8"></linearGradient>
+  </defs><g id="Calque_1-2" data-name="Calque 1">
+    <path class="cls-1" d="M118.74,358.39l161.87-192.6H126.06v-82.89h264.27v70.7l-152.13,192.6h155.06v82.89H118.74v-70.7Z"></path>
+    <path class="cls-2" d="M256,512c-68.38,0-132.67-26.63-181.02-74.98C26.63,388.67,0,324.38,0,256S26.63,123.33,74.98,74.98C123.33,26.63,187.62,0,256,0s132.67,26.63,181.02,74.98c48.35,48.35,74.98,112.64,74.98,181.02s-26.63,132.67-74.98,181.02c-48.35,48.35-112.64,74.98-181.02,74.98ZM256,22.45C127.22,22.45,22.45,127.22,22.45,256s104.77,233.55,233.55,233.55,233.55-104.77,233.55-233.55S384.78,22.45,256,22.45Z"></path>
+  </g></svg>

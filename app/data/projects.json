@@ -1,73 +1,260 @@
 [
   {
     "id": "p1",
-    "title": "Argent Bank",
-    "category": "Web Design",
-    "image": "/images/kasa.webp",
+    "title": "Kasa",
+    "image": "/images/screen-kasa.webp",
     "year": "2024",
-    "role": "Creative Developer",
-    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
-    "description": "Une expérience immersive basée sur...",
+    "stack": [
+      { "name": "React.js", "icon": "react" },
+      { "name": "React Router", "icon": "reactrouter" },
+      { "name": "Node.js", "icon": "nodedotjs" },
+      { "name": "Sass", "icon": "sass" }
+    ],
+    "video": "/videos/kasa-screenvid.mp4",
     "cover": "/images/projets/cover-1.jpg",
     "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
-    "link": "https://..."
+    "link": "https://zesir.github.io/Kaza/",
+    "translations": {
+      "fr": {
+        "category": "Web Design",
+        "role": "Creative Developer",
+        "description": "Refonte totale du front-end d'une plateforme de location de logements entre particuliers. Le défi consistait à passer d'une architecture ancienne en ASP.NET à une application moderne, rapide et responsive utilisant React et Vite.",
+        "objectif": [
+          "Initialiser une application web moderne avec l'outil de build Vite.",
+          "Implémenter une navigation multi-pages fluide sans rechargement de page.",
+          "Créer des composants d'interface réutilisables et dynamiques.",
+          "Assurer une fidélité totale aux maquettes Figma (Desktop et Mobile)."
+        ],
+        "Compétence": [
+          "Routage Dynamique : Configuration de React Router pour gérer les pages d'erreur (404) et les fiches logements via des IDs dynamiques.",
+          "Logique de Composants : Création de composants complexes comme le Carrousel d'images et les Collapse (menus accordéons) avec gestion d'état local (useState).",
+          "Intégration UI/UX : Utilisation de SASS pour implémenter un design responsive et des animations fluides (transitions, rotations d'icônes).",
+          "Gestion des données : Extraction et filtrage de données JSON pour alimenter dynamiquement les galeries et les descriptions."
+        ],
+        "résultat": "Une application Single Page Application (SPA) performante, offrant une navigation instantanée. L'interface est entièrement responsive, garantissant une expérience utilisateur optimale sur smartphone, tablette et ordinateur.",
+        "Amélioration": [
+          "Migration des données locales vers une véritable API MongoDB pour permettre l'ajout de nouveaux logements via une interface d'administration.",
+          "Ajout d'une fonctionnalité de favoris utilisant le localStorage.",
+          "Optimisation du SEO via React Helmet pour personnaliser les balises <title> et meta de chaque fiche logement."
+        ]
+      },
+      "en": {
+        "category": "Web Design",
+        "role": "Creative Developer",
+        "description": "Complete front-end overhaul of a peer-to-peer housing rental platform. The challenge was to migrate from a legacy ASP.NET architecture to a modern, fast, and responsive application using React and Vite.",
+        "objectif": [
+          "Initialize a modern web application with the Vite build tool.",
+          "Implement smooth multi-page navigation without page reloads.",
+          "Create reusable and dynamic UI components.",
+          "Ensure full fidelity to Figma mockups (Desktop and Mobile)."
+        ],
+        "Compétence": [
+          "Dynamic Routing: Configuring React Router to handle error pages (404) and property listings via dynamic IDs.",
+          "Component Logic: Building complex components like the image Carousel and Collapse (accordion menus) with local state management (useState).",
+          "UI/UX Integration: Using SASS to implement a responsive design and smooth animations (transitions, icon rotations).",
+          "Data Management: Extracting and filtering JSON data to dynamically populate galleries and descriptions."
+        ],
+        "résultat": "A high-performance Single Page Application (SPA) offering instant navigation. The interface is fully responsive, ensuring an optimal user experience on smartphones, tablets, and desktops.",
+        "Amélioration": [
+          "Migrating local data to a real MongoDB API to allow adding new listings via an admin interface.",
+          "Adding a favorites feature using localStorage.",
+          "SEO optimization via React Helmet to customize the title and meta tags for each listing."
+        ]
+      }
+    }
   },
   {
     "id": "p2",
-    "title": "Projet Beta",
-    "category": "Développement",
-    "image": "/images/damovieclub.webp",
+    "title": "Argent Bank",
+    "image": "/images/argentbank.webp",
     "year": "2024",
-    "role": "Developer Frontend",
-    "stack": ["React", "Redux", "Swagger", "Node", "Sass", "Fetch"],
-    "gif": "/images/booki.gif",
-    "objectif": [
-      "Créer une application React complète et responsive.",
-      "Mettre en place un système d'authentification sécurisé (Login/Logout).",
-      "Permettre à l'utilisateur de modifier son profil et de visualiser ses comptes.",
-      "Permettre à l'utilisateur de modifier son profil et de visualiser ses comptes."
+    "stack": [
+      { "name": "React", "icon": "react" },
+      { "name": "Redux", "icon": "redux" },
+      { "name": "Swagger", "icon": "swagger" },
+      { "name": "Node.js", "icon": "nodedotjs" },
+      { "name": "Sass", "icon": "sass" },
+      { "name": "Fetch API" }
     ],
-    "Compétence": [
-      "Gestion du State Global : Utilisation de Redux pour maintenir la session utilisateur persistante entre les pages.",
-      "Interactions API : Intégration de tokens JWT pour sécuriser les routes et les échanges de données.",
-      "Modélisation technique : Rédaction de documentation API via Swagger pour définir les structures de données (transactions).",
-      "Clean Code : Organisation rigoureuse des composants React et des slices Redux."
-    ],
-    "description": "Développement de la partie Front-End d'une nouvelle banque en ligne. Le back-end était déjà fourni, et l'enjeu était de créer une interface utilisateur dynamique capable de communiquer avec une API REST sécurisée.",
-    "résultat": "Une application web fluide où l'utilisateur peut se connecter, accéder à son tableau de bord de manière sécurisée et mettre à jour ses informations personnelles en temps réel sans rechargement de page.",
-    "Amélioration": [
-      "Ajout de graphiques de dépenses (type Recharts) pour une meilleure visualisation des données.",
-      "Implémentation d'un Dark Mode pour améliorer le confort visuel (UI/UX).",
-      "Mise en place de tests unitaires avec Jest pour sécuriser les composants critiques de login."
-    ],
+    "video": "/videos/argentbank-screenvid.mp4",
     "cover": "/images/projets/cover-1.jpg",
     "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
-    "link": "https://..."
+    "link": "https://argentbank-frontend-react.onrender.com/",
+    "translations": {
+      "fr": {
+        "category": "Développement",
+        "role": "Développeur Frontend",
+        "description": "Développement de la partie Front-End d'une nouvelle banque en ligne. Le back-end était déjà fourni, et l'enjeu était de créer une interface utilisateur dynamique capable de communiquer avec une API REST sécurisée.",
+        "objectif": [
+          "Créer une application React complète et responsive.",
+          "Mettre en place un système d'authentification sécurisé (Login/Logout).",
+          "Permettre à l'utilisateur de modifier son profil et de visualiser ses comptes.",
+          "Permettre à l'utilisateur de modifier son profil et de visualiser ses comptes."
+        ],
+        "Compétence": [
+          "Gestion du State Global : Utilisation de Redux pour maintenir la session utilisateur persistante entre les pages.",
+          "Interactions API : Intégration de tokens JWT pour sécuriser les routes et les échanges de données.",
+          "Modélisation technique : Rédaction de documentation API via Swagger pour définir les structures de données (transactions).",
+          "Clean Code : Organisation rigoureuse des composants React et des slices Redux."
+        ],
+        "résultat": "Une application web fluide où l'utilisateur peut se connecter, accéder à son tableau de bord de manière sécurisée et mettre à jour ses informations personnelles en temps réel sans rechargement de page.",
+        "Amélioration": [
+          "Ajout de graphiques de dépenses (type Recharts) pour une meilleure visualisation des données.",
+          "Implémentation d'un Dark Mode pour améliorer le confort visuel (UI/UX).",
+          "Mise en place de tests unitaires avec Jest pour sécuriser les composants critiques de login."
+        ]
+      },
+      "en": {
+        "category": "Development",
+        "role": "Frontend Developer",
+        "description": "Front-end development for a new online bank. The back-end was already provided, and the challenge was to create a dynamic user interface capable of communicating with a secure REST API.",
+        "objectif": [
+          "Build a complete and responsive React application.",
+          "Implement a secure authentication system (Login/Logout).",
+          "Allow users to edit their profile and view their accounts.",
+          "Allow users to edit their profile and view their accounts."
+        ],
+        "Compétence": [
+          "Global State Management: Using Redux to maintain persistent user sessions across pages.",
+          "API Interactions: Integrating JWT tokens to secure routes and data exchanges.",
+          "Technical Modeling: Writing API documentation via Swagger to define data structures (transactions).",
+          "Clean Code: Rigorous organization of React components and Redux slices."
+        ],
+        "résultat": "A smooth web application where users can log in, securely access their dashboard, and update their personal information in real time without page reloads.",
+        "Amélioration": [
+          "Adding expense charts (e.g. Recharts) for better data visualization.",
+          "Implementing a Dark Mode to improve visual comfort (UI/UX).",
+          "Setting up unit tests with Jest to secure critical login components."
+        ]
+      }
+    }
   },
   {
     "id": "p3",
-    "title": "Projet Beta",
-    "category": "Développement",
-    "image": "/images/kasa.webp",
+    "title": "Sophie Bluel",
+    "image": "/images/sophie-bluel.webp",
     "year": "2024",
-    "role": "Creative Developer",
-    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
-    "description": "Une expérience immersive basée sur...",
+    "stack": [
+      { "name": "JavaScript", "icon": "" },
+      { "name": "DOM API", "icon": "" },
+      { "name": "Fetch API", "icon": "" },
+      { "name": "Git & GitHub.", "icon": "" }
+    ],
+    "video": "/videos/sophiebluel-screenvideo.mp4",
     "cover": "/images/projets/cover-1.jpg",
     "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
-    "link": "https://..."
+    "link": "https://zesir.github.io/Portfolio-architecte-sophie-bluel/index.html",
+    "translations": {
+      "fr": {
+        "category": "Développement",
+        "role": "Creative Developer",
+        "description": "Développement du front-end du site vitrine d'une architecte d'intérieur. Le projet consistait à rendre une page statique totalement dynamique en connectant l'interface à une API pour gérer les travaux et l'administration du site.",
+        "objectif": [
+          "Récupérer et afficher les données des travaux via une API REST.",
+          "Concevoir un système de filtrage par catégorie (Objets, Appartements, etc.).",
+          "Créer une interface d'authentification (Login) pour l'administrateur.",
+          "Développer une fenêtre modale complexe pour l'ajout et la suppression de projets."
+        ],
+        "Compétence": [
+          "Manipulation dynamique du DOM : Génération automatique de la galerie d'images et des filtres sans rechargement de la page.",
+          "Gestion des formulaires & Sécurité : Validation des champs de connexion et gestion du stockage du Token d'authentification (sessionStorage).",
+          "Communication Asynchrone : Utilisation de async/await pour gérer les appels API et traiter les réponses JSON.",
+          "Expérience Utilisateur (UX) : Création d'une modale à deux étapes (vue galerie / vue ajout de photo) avec prévisualisation immédiate de l'image sélectionnée."
+        ],
+        "résultat": "Un site fonctionnel et interactif permettant à l'architecte de gérer son portfolio en toute autonomie. L'interface d'administration est sécurisée et les mises à jour (ajout/suppression) se reflètent instantanément sur le site.",
+        "Amélioration": [
+          "Implémentation d'une fonction de Drag & Drop pour l'upload des images dans la modale.",
+          "Ajout de notifications Toast pour confirmer le succès ou l'échec des actions (ex: Projet supprimé avec succès).",
+          "Optimisation du chargement des images (Lazy loading) pour améliorer les performances SEO."
+        ]
+      },
+      "en": {
+        "category": "Development",
+        "role": "Creative Developer",
+        "description": "Front-end development of a showcase website for an interior architect. The project involved making a static page fully dynamic by connecting the interface to an API to manage works and site administration.",
+        "objectif": [
+          "Fetch and display project data via a REST API.",
+          "Design a category-based filtering system (Objects, Apartments, etc.).",
+          "Create an authentication interface (Login) for the administrator.",
+          "Develop a complex modal window for adding and deleting projects."
+        ],
+        "Compétence": [
+          "Dynamic DOM Manipulation: Automatically generating the image gallery and filters without page reloads.",
+          "Form Management & Security: Validating login fields and handling authentication token storage (sessionStorage).",
+          "Asynchronous Communication: Using async/await to handle API calls and process JSON responses.",
+          "User Experience (UX): Creating a two-step modal (gallery view / photo upload view) with immediate preview of the selected image."
+        ],
+        "résultat": "A functional and interactive site allowing the architect to manage her portfolio independently. The admin interface is secured and updates (add/delete) are reflected instantly on the site.",
+        "Amélioration": [
+          "Implementing a Drag & Drop feature for image uploads in the modal.",
+          "Adding Toast notifications to confirm the success or failure of actions (e.g. Project successfully deleted).",
+          "Optimizing image loading (Lazy loading) to improve SEO performance."
+        ]
+      }
+    }
   },
   {
     "id": "p4",
-    "title": "Projet Beta",
-    "category": "Développement",
-    "image": "/images/kasa.webp",
+    "title": "Da movie club",
+    "image": "/images/damovieclub.webp",
     "year": "2024",
-    "role": "Creative Developer",
-    "stack": ["vuedotjs", "greensock", "three-dot-js", "sass"],
-    "description": "Une expérience immersive basée sur...",
+    "stack": [
+      { "name": "React.js", "icon": "react" },
+      { "name": "Material UI", "icon": "" },
+      { "name": "TMDB API", "icon": "" },
+      { "name": "Netlify", "icon": "" }
+    ],
+    "video": "/videos/damovieclub-screenvid.mp4",
     "cover": "/images/projets/cover-1.jpg",
     "gallery": ["/images/projets/img-1.jpg", "/images/projets/img-2.jpg"],
-    "link": "https://..."
+    "link": "https://da-movie-club.netlify.app/",
+    "translations": {
+      "fr": {
+        "category": "Développement",
+        "role": "Creative Developer",
+        "description": "Développement du front-end du site vitrine d'une architecte d'intérieur. Le projet consistait à rendre une page statique totalement dynamique en connectant l'interface à une API pour gérer les travaux et l'administration du site.",
+        "objectif": [
+          "Connecter l'application à l'API REST de The Movie Database (TMDB).",
+          "Offrir une expérience de recherche fluide et une navigation par genres/tendances.",
+          "Mettre en place une interface utilisateur élégante et professionnelle grâce à une bibliothèque de composants.",
+          "Préparer l'architecture pour des fonctionnalités sociales (avis, listes de favoris)."
+        ],
+        "Compétence": [
+          "Intégration de bibliothèques tierces : Personnalisation du thème MUI (Theming) pour créer une identité visuelle propre à Da Movie Club.",
+          "Gestion de données externes : Manipulation de flux de données massifs (pagination, filtrage par popularité ou date de sortie).",
+          "UX / UI Design : Création de Skeletons de chargement et de composants Cards interactifs pour améliorer le ressenti utilisateur lors des appels API.",
+          "Clean Code : Organisation modulaire des composants pour faciliter l'évolution future vers un système de notation (backend.)"
+        ],
+        "résultat": "Une application performante et esthétique qui permet de consulter les dernières sorties cinéma en temps réel. Le choix de MUI a permis d'obtenir un rendu Pixel Perfect et une compatibilité mobile immédiate.",
+        "Amélioration": [
+          "Système d'authentification (Firebase ou Supabase) : Pour permettre aux utilisateurs de créer leur propre Watchlist.",
+          "Fonctionnalité de notation : Implémentation d'un système d'étoiles interactif lié à une base de données NoSQL.",
+          "Partage social : Ajout de boutons de partage vers les réseaux sociaux pour chaque fiche de film."
+        ]
+      },
+      "en": {
+        "category": "Development",
+        "role": "Creative Developer",
+        "description": "Front-end development of a movie discovery web app. The project involved connecting the interface to The Movie Database (TMDB) API to display real-time cinema data with a polished, component-driven UI.",
+        "objectif": [
+          "Connect the application to The Movie Database (TMDB) REST API.",
+          "Offer a smooth search experience and navigation by genres and trends.",
+          "Build an elegant and professional user interface using a component library.",
+          "Prepare the architecture for social features (reviews, favorites lists)."
+        ],
+        "Compétence": [
+          "Third-party Library Integration: Customizing the MUI theme (Theming) to create a visual identity specific to Da Movie Club.",
+          "External Data Management: Handling large data streams (pagination, filtering by popularity or release date).",
+          "UX / UI Design: Creating loading Skeletons and interactive Card components to improve user experience during API calls.",
+          "Clean Code: Modular component organization to facilitate future evolution towards a rating system (backend)."
+        ],
+        "résultat": "A performant and aesthetic application that lets users browse the latest cinema releases in real time. Choosing MUI enabled Pixel Perfect rendering and immediate mobile compatibility.",
+        "Amélioration": [
+          "Authentication system (Firebase or Supabase): To allow users to create their own Watchlist.",
+          "Rating feature: Implementation of an interactive star system linked to a NoSQL database.",
+          "Social sharing: Adding social media share buttons for each movie page."
+        ]
+      }
+    }
   }
 ]
