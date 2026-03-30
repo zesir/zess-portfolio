@@ -311,7 +311,7 @@ li {
     will-change: transform;
   }
   .accroche {
-    font-size: clamp(1.5rem, 1.5vw, 2.5rem);
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     line-height: 1.4;
     strong {
       color: var(--accent-color, $color-accent) !important;
@@ -1540,6 +1540,10 @@ li {
   }
 
   /* Bio */
+  .bio-section .accroche {
+    font-size: clamp(0.875rem, 4vw, 1.1rem);
+  }
+
   .bio-section .reveal-line {
     font-size: clamp(1.1rem, 4vw, 1.8rem);
   }
@@ -1561,7 +1565,8 @@ li {
   }
 
   .projects-header .projectsTitle {
-    font-size: 25vw;
+    font-size: 20vw;
+    line-height: 1.1;
   }
 
   /* Page détail projet */
@@ -1636,6 +1641,7 @@ li {
   }
 
   .projects-header .projectsTitle {
-    font-size: 30vw;
+    font-size: 25vw;
+    line-height: 1.1;
   }
 }
