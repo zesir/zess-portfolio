@@ -388,7 +388,6 @@ onMounted(async () => {
 
 watch(() => themeStore.backgroundColor, () => {
   if (!mainTl) return;
-  mainTl.invalidate();
   mainTl.scrollTrigger?.update();
 });
 
