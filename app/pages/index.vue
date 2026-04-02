@@ -243,7 +243,7 @@ onMounted(async () => {
     const slideEl = projectSection.value.projectsSlide;
     const cards = slideEl.querySelectorAll(".project-card");
     const allImages = slideEl.querySelectorAll(".project-img");
-    const projectTitle = sectionEl.querySelector(".projectsTitle");
+    const projectTitle = sectionEl.querySelector<HTMLElement>(".projectsTitle");
     const stickyContainer = sectionEl.querySelector(
       ".projects-sticky-container",
     ) as HTMLElement;
@@ -256,6 +256,7 @@ onMounted(async () => {
       borderRadius: 80,
     });
     // Compensation du drift dû à transform-origin: left center (scale grossit vers la droite)
+    if (!projectTitle) return;
     const titleW = projectTitle.offsetWidth;
     const xReveal = -(titleW * 0.1); // (scale 1.2 - 1) / 2 * width
     $gsap.set(projectTitle, {

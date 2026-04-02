@@ -29,10 +29,13 @@
             </div>
             <div class="card-content">
               <div class="image-placeholder">
-                <img
+                <NuxtImg
                   :src="project.image"
                   :alt="project.title"
                   class="project-img"
+                  sizes="535px"
+                  :width="535"
+                  :height="301"
                 />
               </div>
             </div>
