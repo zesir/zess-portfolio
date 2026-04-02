@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // nuxt.config.ts
+import purgecss from "@fullhuman/postcss-purgecss";
+
 export default defineNuxtConfig({
   // date de compatibilité
   compatibilityDate: "2025-07-15",
@@ -101,6 +103,34 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {},
+      },
+      postcss: {
+        plugins: [
+          purgecss({
+            content: [
+              "./app/**/*.vue",
+              "./app/**/*.ts",
+              "./app/**/*.js",
+            ],
+            safelist: {
+              // Classes ajoutées dynamiquement par GSAP, Vue transitions, JS
+              standard: [
+                /^gsap-/,
+                /^page-/,
+                /^toast/,
+                /^v-/,
+                /^nuxt-/,
+                "is-dark",
+                "scrolled",
+                "visually-hidden",
+              ],
+              deep: [/^project-/, /^projects-/],
+            },
+            defaultExtractor: (content) =>
+              content.match(/[\w-/:]+(?<!:)/g) ?? [],
+            skippedContentGlobs: ["**/*.svg"],
+          }),
+        ],
       },
     },
   },
