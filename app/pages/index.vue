@@ -91,7 +91,8 @@ onMounted(async () => {
   if (!route.query.step) window.scrollTo(0, 0);
 
   await nextTick();
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  // Attendre la fin de la transition de page (0.6s) avant que GSAP mesure les dimensions
+  await new Promise((resolve) => setTimeout(resolve, 650));
   if (!route.query.step) window.scrollTo(0, 0);
 
   if (!$gsap || !scrollWrapper.value) return;
@@ -254,7 +255,15 @@ onMounted(async () => {
       scale: 0.8,
       borderRadius: 80,
     });
-    $gsap.set(projectTitle, { xPercent: 20, autoAlpha: 0, scale: 1.5 });
+    // Compensation du drift dû à transform-origin: left center (scale grossit vers la droite)
+    const titleW = projectTitle.offsetWidth;
+    const xReveal = -(titleW * 0.1); // (scale 1.2 - 1) / 2 * width
+    $gsap.set(projectTitle, {
+      x: -(titleW * 0.25),
+      xPercent: 0,
+      autoAlpha: 0,
+      scale: 1.5,
+    });
     $gsap.set(cards, { autoAlpha: 0, x: 100 });
 
     mainTl
@@ -275,7 +284,7 @@ onMounted(async () => {
       // Reveal Titre et Fade-in des Cards
       .to(
         projectTitle,
-        { autoAlpha: 1, xPercent: 0, scale: 1.2, duration: 2 },
+        { autoAlpha: 1, x: xReveal, xPercent: 0, scale: 1.2, duration: 2 },
         "-=3.5",
       )
       // Label déclenché quand la section est montée, avant l'apparition des cartes
@@ -290,6 +299,7 @@ onMounted(async () => {
           lineHeight: "7rem",
           duration: 4,
           ease: "expo.inOut",
+          opacity: 0,
         },
         "-=0.5",
       )
@@ -338,7 +348,7 @@ onMounted(async () => {
   navLabels[4] = "step-projects-ready";
   // step-contact est hors timeline — on lui attribue totalDuration comme borne
   sectionTimes = navLabels
-    .filter(l => l !== "step-contact")
+    .filter((l) => l !== "step-contact")
     .map((label) => mainTl.labels[label] ?? 0);
 
   // ScrollTrigger séparé pour la section contact (hors scroll pincé)
@@ -354,7 +364,8 @@ onMounted(async () => {
         },
         onLeaveBack: () => {
           currentStep.value = 4;
-          scrollProgress.value = ((SECTION_LABELS.length - 2) / (SECTION_LABELS.length - 1)) * 100;
+          scrollProgress.value =
+            ((SECTION_LABELS.length - 2) / (SECTION_LABELS.length - 1)) * 100;
         },
       },
       y: 60,
@@ -372,8 +383,7 @@ onMounted(async () => {
       const targetTime = mainTl.labels[targetLabel] ?? 0;
       const st = mainTl.scrollTrigger;
       const targetScroll =
-        st.start +
-        (targetTime / mainTl.totalDuration()) * (st.end - st.start);
+        st.start + (targetTime / mainTl.totalDuration()) * (st.end - st.start);
       mainTl.seek(targetTime);
       window.scrollTo(0, targetScroll);
     }
@@ -386,10 +396,13 @@ onMounted(async () => {
   ready.value = true;
 });
 
-watch(() => themeStore.backgroundColor, () => {
-  if (!mainTl) return;
-  mainTl.scrollTrigger?.update();
-});
+watch(
+  () => themeStore.backgroundColor,
+  () => {
+    if (!mainTl) return;
+    mainTl.scrollTrigger?.update();
+  },
+);
 
 const goToSection = (index: number) => {
   if (!mainTl?.scrollTrigger) return;

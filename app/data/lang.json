@@ -21,8 +21,8 @@
     },
     "welcome": {
       "prefix": "Nice to meet you",
-      "fallback": "John",
-      "callJohn": "(I'll call you John)",
+      "fallback": "Neo",
+      "callJohn": "(I'll call you Neo)",
       "LetIntroduce": "So let me introduce myself"
     },
     "About": {
@@ -93,8 +93,8 @@
     },
     "welcome": {
       "prefix": "Enchanté",
-      "fallback": "Jean",
-      "callJohn": "(Je t'appellerai Jean)",
+      "fallback": "Neo",
+      "callJohn": "(Je t'appellerai Neo)",
       "LetIntroduce": "Laissez moi me présenter"
     },
     "About": {

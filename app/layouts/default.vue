@@ -8,6 +8,6 @@
 <style scoped>
 .app {
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 </style>

@@ -378,7 +378,7 @@ li {
   overflow: hidden;
   display: flex;
   align-items: center;
-  background-color: #1485cc;
+  background-color: $color-primary;
   background-image: $pattern-grid-w;
   background-attachment: fixed;
   background-repeat: repeat;
@@ -414,9 +414,11 @@ li {
 
 .projects-header {
   position: absolute;
-  left: 5vw;
+  left: 0;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
+  text-align: center;
   z-index: 10;
   pointer-events: none;
 

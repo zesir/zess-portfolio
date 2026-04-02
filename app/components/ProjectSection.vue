@@ -2,10 +2,10 @@
   <section class="projects-section" ref="interceptor" aria-labelledby="projects-section-heading">
 
     <div class="projects-sticky-container">
+      <div class="projects-header">
+        <h2 id="projects-section-heading" class="projectsTitle">{{ lang.projectsSection.title[0] }}<br />{{ lang.projectsSection.title[1] }}</h2>
+      </div>
       <div class="projects-slide" ref="projectsSlide">
-        <div class="projects-header">
-          <h2 id="projects-section-heading" class="projectsTitle">{{ lang.projectsSection.title[0] }}<br />{{ lang.projectsSection.title[1] }}</h2>
-        </div>
 
         <article
           v-for="(project, index) in projects"
@@ -64,7 +64,7 @@ const projects = computed(() =>
 );
 
 const router = useRouter();
-const visitorName = computed(() => themeStore.confirmedName || '');
+const visitorName = computed(() => themeStore.confirmedName || lang.value.welcome.fallback);
 const toast = useProjectToast();
 
 const goToProject = async (id: string) => {
@@ -91,7 +91,7 @@ const initParallax = (parentTimeline: gsap.core.Timeline) => {
     "<",
   ); // le "<" signifie "en même temps que le scroll horizontal"
 };
-const onMouseEnter = (event: MouseEvent) => {
+const onMouseEnter = (event: MouseEvent | FocusEvent) => {
   const target = event.currentTarget as HTMLElement;
   // On anime le PLACEHOLDER (le parent de l'image)
   const holder = target.querySelector(".image-placeholder");
@@ -106,7 +106,7 @@ const onMouseEnter = (event: MouseEvent) => {
   }
 };
 
-const onMouseLeave = (event: MouseEvent) => {
+const onMouseLeave = (event: MouseEvent | FocusEvent) => {
   const target = event.currentTarget as HTMLElement;
   const holder = target.querySelector(".image-placeholder");
 
