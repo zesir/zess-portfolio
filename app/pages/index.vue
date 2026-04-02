@@ -248,6 +248,10 @@ onMounted(async () => {
       ".projects-sticky-container",
     ) as HTMLElement;
 
+    // Lire les dimensions AVANT tout write GSAP pour éviter le forced reflow
+    if (!projectTitle) return;
+    const titleW = projectTitle.offsetWidth;
+
     $gsap.set(sectionEl, {
       autoAlpha: 1,
       yPercent: 100,
@@ -255,9 +259,6 @@ onMounted(async () => {
       scale: 0.8,
       borderRadius: 80,
     });
-    // Compensation du drift dû à transform-origin: left center (scale grossit vers la droite)
-    if (!projectTitle) return;
-    const titleW = projectTitle.offsetWidth;
     const xReveal = -(titleW * 0.1); // (scale 1.2 - 1) / 2 * width
     $gsap.set(projectTitle, {
       x: -(titleW * 0.25),

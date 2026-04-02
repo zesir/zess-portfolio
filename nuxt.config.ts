@@ -72,17 +72,6 @@ export default defineNuxtConfig({
         { rel: "preconnect", href: "https://use.typekit.net", crossorigin: "" },
         { rel: "preconnect", href: "https://p.typekit.net", crossorigin: "" },
 
-        // Google Fonts — non-bloquant
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;800&display=swap",
-        },
-
-        // TypeKit — non-bloquant
-        {
-          rel: "stylesheet",
-          href: "https://use.typekit.net/cme4duv.css",
-        },
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },
@@ -90,7 +79,8 @@ export default defineNuxtConfig({
 
   // plugins
   plugins: [
-    "~/plugins/gsap.client.ts", // GSAP pour animations
+    "~/plugins/gsap.client.ts",
+    "~/plugins/fonts.client.ts",
   ],
 
   // TypeScript strict (optionnel mais conseillé)
