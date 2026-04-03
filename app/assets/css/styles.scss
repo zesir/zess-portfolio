@@ -1260,6 +1260,24 @@ li {
   }
 }
 
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  color: rgba($color-primary, 0.5);
+  font-family: $font-text;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--accent-color, $color-accent);
+  }
+}
+
 /*============================================================
   8. NAVIGATION
 ============================================================*/

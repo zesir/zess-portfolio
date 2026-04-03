@@ -61,6 +61,16 @@
           </button>
         </div>
       </form>
+
+      <a
+        href="https://github.com/zesir"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-link"
+      >
+        <ClientOnly><Icon name="simple-icons:github" size="20" /></ClientOnly>
+        GitHub
+      </a>
     </div>
   </section>
 </template>
